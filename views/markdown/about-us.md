@@ -9,9 +9,7 @@
 
 <div class="row"><div class="col-md-6">
 
-__GitHub Node.JS: <a href="https://github.com/DocuSign/sample-app-loanco-nodejs" rel="nofollow">https://github.com/DocuSign/sample-app-loanco-nodejs</a>__
-<br />
-__GitHub C#: <a href="https://github.com/DocuSign/sample-app-loanco-csharp" rel="nofollow">https://github.com/DocuSign/sample-app-loanco-csharp</a>__
+__Source on GitHub: <a target="_blank" href="https://github.com/DocuSign/sample-app-loanco-nodejs" rel="nofollow">https://github.com/DocuSign/sample-app-loanco-nodejs</a>__
 
 <br />
 <br />
@@ -37,19 +35,16 @@ __GitHub C#: <a href="https://github.com/DocuSign/sample-app-loanco-csharp" rel=
 <h4>API Tools and Links</h4>
 
 <h5>Developer Center</h5>
-https://developers.docusign.com
+<a target="_blank" href="https://developers.docusign.com">https://developers.docusign.com</a>
 
-<h5>API Code Examples</h5>
-https://developers.docusign.com/esign-rest-api/code-examples
+<h5>DocuSign eSignature API Code Examples</h5>
+<a target="_blank" href="https://developers.docusign.com/esign-rest-api/code-examples">https://developers.docusign.com/esign-rest-api/code-examples</a>
 
-<h5>API Documentation</h5>
-https://developers.docusign.com/esign-rest-api/reference 
-
-<h5>API Explorer</h5>
-https://apiexplorer.docusign.com/  
+<h5>DocuSign eSignature API Documentation</h5>
+<a target="_blank" href="https://developers.docusign.com/esign-rest-api/reference">https://developers.docusign.com/esign-rest-api/reference</a> 
 
 <h5>Developer Community</h5> 
-<a href="http://stackoverflow.com/questions/tagged/docusignapi" rel="nofollow">http://stackoverflow.com/questions/tagged/docusignapi</a>
+<a target="_blank" href="http://stackoverflow.com/questions/tagged/docusignapi" rel="nofollow">http://stackoverflow.com/questions/tagged/docusignapi</a>
 
 </div></div>
 
