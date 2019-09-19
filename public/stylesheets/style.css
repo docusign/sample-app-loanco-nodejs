@@ -1,0 +1,225 @@
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+nav {
+	background: #4186ec !important;
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-brand {
+	color: white;
+	text-shadow: none;
+}
+.navbar-default .navbar-brand {
+	padding-top: 8px;
+}
+
+.navbar-default .navbar-brand div {
+	font-size: 10px;
+	position: relative;
+	top: -4px;
+	opacity: 0.7;
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:active,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:active {
+	color: rgba(255,255,255,0.8);
+}
+
+.navbar-brand {
+	/*color: white !important;*/
+}
+
+.navbar-default .navbar-nav>.active > a,
+.navbar-default .navbar-nav>.open > a {
+	background: #abd0e6 !important;
+}
+
+
+.h3-hint {
+	font-size: 12px;
+
+}
+
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.videoWrapper object,
+.videoWrapper iframe,
+.videoWrapper embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+.spinner {
+  display: inline-block;
+  opacity: 0;
+  width: 0;
+
+  -webkit-transition: opacity 0.25s, width 0.25s;
+  -moz-transition: opacity 0.25s, width 0.25s;
+  -o-transition: opacity 0.25s, width 0.25s;
+  transition: opacity 0.25s, width 0.25s;
+}
+
+.has-spinner.active {
+  cursor:progress;
+}
+
+.has-spinner.active .spinner {
+  opacity: 1;
+  width: auto; /* This doesn't work, just fix for unkown width elements */
+}
+
+.has-spinner.btn.active .spinner {
+    width: 16px;
+}
+
+
+.collapseTrigger {
+	cursor: pointer;
+}
+.collapseTrigger:not(.collapsed) .show-on-collapsed {
+	display: none;
+}
+.collapseTrigger.collapsed .show-on-open {
+	display: none;
+}
+
+#collapseAdvanced {
+	padding-left: 20px;
+	border-left: 1px solid blue;
+}
+
+
+.home-hero {
+	background: url("https://www.docusign.com/blog/wp-content/uploads/2015/04/cropped-ds_blog_hp_template-v0-0-2_02.jpg") no-repeat center;
+	background-size: cover;
+}
+
+.home-hero ul li span {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.action-section {
+	padding: 20px 0;
+	background: #ffeebc;
+}
+
+.action-section .btn {
+	background: #ffc820;
+	border-color: #ffc820;
+	color: #333333;
+	text-shadow: none;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+.action-section .btn:active,
+.action-section .btn:hover {
+	background: #e5a305;
+	border-color: #e5a305;
+}
+
+.page-header.main-page-header {
+	border-bottom: 0px;
+	font-size: 52px;
+}
+
+.panel {
+	border-radius: 0px;
+	background: rgba(0,0,0,0.65);
+	color: white;
+
+	border: 0px;
+}
+
+.panel-heading {
+	background: none !important; 
+	color: white !important;
+	border: 0px;
+}
+
+tt {
+    padding: 2px 4px;
+    font-size: 90%;
+    /*color: ;*/
+    background-color: #eff0f1;
+    border-radius: 4px;
+}
+
+footer {
+	border-top: 1px solid rgba(100,100,100,0.1);
+	padding-top: 20px;
+}
+
+.panel .btn-default {
+	border-radius: 0px;
+	background: #1b49a0;
+	text-shadow: none;
+	color: white;
+}
+
+.panel .panel-heading {
+	padding-bottom: 0px;
+}
+.panel .panel-body {
+	padding-top: 0px;
+}
+
+.panel .loan-percentage {
+	text-align: center;
+	font-size: 14px;
+}
+
+.loan-features {
+	border-top: 1px solid #444;
+
+	margin-top: 14px;
+	padding: 14px 0 0 0;
+	font-size: 11px;
+
+	color: #999;
+}
+.loan-features span:hover {
+	color: white;
+}
+
+.loan-features > div:first-child {
+	text-align: center;
+	cursor: pointer;
+
+	opacity: 0.8;
+
+	padding-bottom: 4px;
+}
+
+
+.tooltip.top .tooltip-arrow {
+	border-top-color: white;
+}
+.tooltip .tooltip-inner {
+	background: white !important;
+	color: #333 !important;
+}
+
+
+
+
+
+
+
+

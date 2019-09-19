@@ -1,0 +1,457 @@
+
+{{> header}}
+
+<div class="container">
+
+  <div id="error-why"></div>
+
+  <div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+
+      <h2 class="text-center">
+        Personal Loan Application
+      </h2>
+
+      <hr />
+
+      <form id="mainForm1" data-toggle="validator" method="POST" action="/loan/personal">
+
+        <div class="form-group">
+          <label for="inputFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="" required value="Edgar">
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputLastName">Last Name</label>
+          <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="" required value="Holmes">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail">Email Address</label>
+          <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="" required value="{{default_email}}">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputAddress1Name">Address Line 1</label>
+          <input type="text" class="form-control" id="inputAddress1" name="inputAddress1" placeholder="" required value="123 Disneyland Ave">
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress1Name">Address Line 2</label>
+          <input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="" value="">
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+
+            <div class="form-group">
+              <label for="inputAddress1Name">City</label>
+              <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="" data-error="Please enter your city of residence" required value="Anaheim">
+              <div class="help-block with-errors"></div>
+            </div>
+            
+          </div>
+          <div class="col-sm-3">
+
+            <div class="form-group">
+              <label for="inputState">State</label>
+              <select class="form-control" id="inputState" name="inputState" required>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA" selected="">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="DC">DC</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+              </select>
+              <div class="help-block with-errors"></div>
+            </div>
+            
+          </div>
+          <div class="col-sm-3">
+
+            <div class="form-group">
+              <label for="inputAddress1Name">Zip</label>
+              <input type="text" class="form-control" id="inputZip" name="inputZip" placeholder="" required value="90210">
+              <div class="help-block with-errors"></div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPhone">Phone Number</label>
+          <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="">
+          <div class="help-block with-errors"></div>
+        </div>
+        <p>
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+          </span>
+        </p>
+        <div class="collapse" id="collapseAdvanced">
+
+          <div class="form-group">
+            <label for="input">Signing Location</label>
+            <select class="form-control" name="inputSigningLocation">
+              {{#each signing_location_options}}
+                <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                  {{this}}
+                </option>
+              {{/each}}
+            </select>
+
+            <span class="help-block">
+              Embed the signing experience, or send an email (remote) 
+            </span>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="access_code">Access Code</label>
+            <input type="text" class="form-control" id="access_code" name="inputAccessCode" placeholder="" value="{{config.access_code}}" />
+            <span class="help-block">
+              Set an Access Code for this customer to enter before signing documents
+            </span>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="authentication">Additional Authentication</label>
+            <select class="form-control" name="inputAuthentication" disabled>
+              {{#each authentication_options}}
+                <option value="{{this}}" {{#ifCond this "==" ../config.authentication}}selected{{/ifCond}}>
+                  {{this}}
+                </option>
+              {{/each}}
+            </select>
+            <span class="help-block">
+              Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
+              <br />
+              * This can be enabled when using your own account 
+            </span>
+          </div>
+        </div>
+
+
+        <hr />
+
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-primary has-spinner">
+              Apply for a Personal Loan
+              <span class="spinner"><i class="fa fa-spinner fa-spin icon-spin"></i></span>
+            </button>
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+
+    <div class="col-sm-6">
+
+      <h2 class="text-center" style="opacity:0;">
+        Personal Loan Application
+      </h2>
+
+      <hr />
+
+      <p class="text-right2">
+        <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
+          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> See behind the scenes
+        </span>
+      </p>
+      <div class="collapse" id="collapseHow">
+
+        <hr />
+
+
+        <h4>
+          This Sample Features:
+        </h4>
+        <ul>
+          <li>Single Signer</li>
+          <li>DOCX Import</li>
+          <li>Auto-Place (Anchor) Tab Positioning</li>
+          <li>Embedded Signing (Recipient View)</li>
+          <li>Access Code Authentication</li>
+        </ul>
+
+        <br />
+
+
+        <h4>
+          Code Flow: 
+        </h4>
+
+        <h5>
+          Step 1
+        </h5>
+
+        <p>
+          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to send the signature request with the corresponding form information. The envelope we construct contains a <code>document</code>, a recipient of type <code>signer</code>, and <code>tabs</code> which contain the form fields information. If embedded signing is selected we must also set the <code>clientUserId</code> property on the recipient.
+        </p> 
+        
+        <p>        
+          Multi-factor authentication can be added using an <code>accessCode</code> or additional Authentication (Phone or ID Check). Note that this example uses the <a href="https://developers.docusign.com/esign-rest-api/guides/features/tabs#tab-locations-and-positioning" target="_blank">Auto-Place</a> feature for placing tabs on the document.
+        </p>
+
+        <p>
+          To create and send an envelope send an http POST request to:
+
+<pre>
+POST /v2/accounts/{accountId}/envelopes
+</pre>
+        </p>
+        
+        <p style="padding:20px 0;">
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON" aria-expanded="false" aria-controls="collapseJSON">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+          </span>
+        </p>
+        <div class="collapse" id="collapseJSON">
+<pre>
+{
+  "status": "sent",
+  "emailSubject": "Personal Loan Application",
+  "emailBlurb": "Please sign the Loan application to start the application process.",
+  "documents": [
+    {
+      "documentId": "1",
+      "name": "Document",
+      "fileExtension": "docx",
+      "documentBase64": "-- Base64-encoding document bytes are here --"
+    }
+  ],
+  "recipients": {
+    "signers": [
+      {
+        "tabs": {
+          "signHereTabs": [
+            {
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "X:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "fullNameTabs": [
+            {
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Name:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "textTabs": [
+            {
+              "name": "Phone",
+              "locked": "false",
+              "tabLabel": "Phone",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Phone:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "-2"
+            },
+            {
+              "name": "AddressLine1",
+              "value": "123 Disneyland Ave",
+              "locked": "false",
+              "tabLabel": "AddressLine1",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Address:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "-2"
+            },
+            {
+              "name": "AddressLine2",
+              "locked": "false",
+              "tabLabel": "AddressLine2",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Address:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "35"
+            },
+            {
+              "name": "AddressCityStateZip",
+              "value": "Anaheim, CA 90210",
+              "locked": "false",
+              "tabLabel": "AddressCityStateZip",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Address:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "70"
+            }
+          ],
+          "numberTabs": [
+            {
+              "name": "Amount",
+              "locked": "false",
+              "tabLabel": "Amount",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Amount:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "-2"
+            },
+            {
+              "name": "PaymentDuration",
+              "locked": "false",
+              "tabLabel": "PaymentDuration",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Payment Duration:",
+              "anchorXOffset": "200",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "emailTabs": [
+            {
+              "name": "Email",
+              "value": "-- RECIPIENT EMAIL HERE --",
+              "tabLabel": "Email",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "E-mail:",
+              "anchorXOffset": "100",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "formulaTabs": [
+            {
+              "formula": "[Amount]/[PaymentDuration]",
+              "name": "MonthlyPayment",
+              "tabLabel": "MonthlyPayment",
+              "documentId": "1",
+              "recipientId": "1",
+              "pageNumber": "1",
+              "anchorString": "Monthly Payment:",
+              "anchorXOffset": "200",
+              "anchorYOffset": "-2"
+            }
+          ]
+        },
+        "name": "-- RECIPIENT NAME HERE --",
+        "email": "-- RECIPIENT EMAIL HERE --",
+        "recipientId": "1",
+        "accessCode": "12345",  // if access code selected
+        "clientUserId": "1001"  // if embedded signing selected
+      }
+    ]
+  }
+}
+</pre>
+        </div>
+
+        <h5>
+          Step 2
+        </h5>
+
+        <p>
+          If Embedded Signing was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
+        </p>
+
+        <p>
+          Once the envelope is sent we save the envelope ID and Recipient information to our session then redirect to the <tt>/sign/embedded</tt> page. There we retrieve the envelope ID and recipient info from our session and create the recipient view by generating the URL and displaying in a full-width and full-height iframe.
+        </p>
+        
+        <p>
+          To create the recipient view of the envelope we send an http POST request to:
+        
+<pre>
+POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
+</pre>
+        </p>
+        <p style="padding:20px 0;">
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+          </span>
+        </p>
+        <div class="collapse" id="collapseJSON2">
+<pre>
+{
+  "clientUserId": "1001",
+  "userName": "-- RECIPIENT NAME HERE --",
+  "email": "-- RECIPIENT EMAIL HERE --",
+  "recipientId": "1",
+  "returnUrl": "-- RETURN URL HERE --",
+  "authenticationMethod": "email"
+}
+</pre>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  {{> footer}}
+
+</div>

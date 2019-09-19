@@ -1,0 +1,171 @@
+
+{{> header}}
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-6">
+
+			<div class="">
+				{{#ifCond event "==" "signing_complete"}}
+					<h2 class="text-center">
+						Signing Complete!
+					</h2>
+					<p>
+						{{msg}}
+					</p>
+				{{else}}
+					<h2 class="">
+						{{#if event}}
+							Return Event: {{event}}
+						{{/if}}
+					</h2>
+					<p>
+						{{msg}}
+					</p>
+
+				{{/ifCond}}
+
+				<div class="">
+					<br />
+					{{#if waitingForRemote}}
+						<div>
+							<strong>
+								Your application has been completed and is pending review. We will be in touch soon!
+							</strong>
+						</div>
+					{{else}}
+						{{#if nextUrl}}
+							<div>
+								<strong>
+									<a href="{{nextUrl}}">Click to go to the next Signer</a>
+								</strong>
+							</div>
+						{{else}}
+							<div>
+								<a href="/">Back to Home</a>
+							</div>
+						{{/if}}
+					{{/if}}
+
+
+					<div>
+						<p>
+							<br />
+							<a href="/envelopes">View My Submissions</a>
+						</p>
+					</div>
+
+					<br />
+					<br />
+
+				</div>
+
+			</div>
+
+
+			<!-- Call to Action Section -->
+			<div class="well2 action-section text-center">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<h4>
+						  Get Started with the DocuSign API Today
+						</h4>
+						<br />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<a class="btn btn-lg btn-default btn-block" href="https://go.docusign.com/sandbox/productshot?elq=16799" target="_blank">
+						  Get Your Sandbox
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<p>
+						  <br />
+						  With the Developer Sandbox you can test our APIs for free! Sandbox accounts do not expire and have Enterprise level features enabled.
+						</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-6">
+
+			<br />
+
+			<h4>
+				Possible Signing Return Events
+			</h4>
+
+			<div>
+
+				<p>
+					When a signer returns from an Embedded Signing experience, your application receives one of the following events in the query string: 
+				</p>
+
+				<div>
+					<p>
+						<strong>signing_complete</strong>
+						<br />
+						The recipient has signed the document!  The document will be securely stored on the DocuSign, Inc. servers.
+					</p>
+
+					<p>
+						<strong>cancel</strong>
+						<br />
+						The recipient decides to finish later. The clicked 'Finish Later' instead of 'Decline to Sign'
+					</p>
+
+					<p>
+						<strong>decline</strong>
+						<br />
+						The recipient declined to sign the document. This has VOIDED the document.
+					</p>
+
+					<p>
+						<strong>exception</strong>
+						<br />
+						An exception has occurred on the server during the signing session.  Please check the parameters passed to the Web Service Methods.
+					</p>
+
+					<p>
+						<strong>fax_pending</strong>
+						<br />
+						Recipient has a fax pending.
+					</p>
+
+					<p>
+						<strong>session_timeout</strong>
+						<br />
+						The recipient did not sign the document in time.  The timeout is set to 20 minutes.
+					</p>
+
+					<p>
+						<strong>ttl_expired</strong>
+						<br />
+						The token was not used within the timeout period or the token was already accessed. 
+					</p>
+
+					<p>
+						<strong>viewing_complete</strong>
+						<br />
+						The recipient did not need to sign but has completed the viewing ceremony. 
+					</p>
+
+					<p>
+						<a href="https://developers.docusign.com/esign-rest-api/guides/features/embedding" target="_blank">Learn more about Embedded Signing</a>
+					</p>
+
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+
+	{{> footer}}
+</div>

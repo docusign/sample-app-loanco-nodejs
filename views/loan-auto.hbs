@@ -1,0 +1,391 @@
+
+{{> header}}
+
+<div class="container">
+
+  <div id="error-why"></div>
+
+  <div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+
+      <h2 class="text-center">
+        Auto Loan Application
+      </h2>
+
+      <hr />
+
+      <form id="mainForm1" data-toggle="validator" method="POST" action="/loan/auto">
+
+        <div class="form-group">
+          <label for="inputFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="" required value="Edgar">
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputLastName">Last Name</label>
+          <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="" required value="Holmes">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail">Email Address</label>
+          <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="" required value="{{default_email}}">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPhone">Phone Number</label>
+          <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="" value="" />
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <p>
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+          </span>
+        </p>
+        <div class="collapse" id="collapseAdvanced">
+
+          <div class="form-group">
+            <label for="input">Signing Location</label>
+            <select class="form-control" name="inputSigningLocation">
+              {{#each signing_location_options}}
+                <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                  {{this}}
+                </option>
+              {{/each}}
+            </select>
+
+            <span class="help-block">
+              Embed the signing experience, or send an email (remote) 
+            </span>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="access_code">Access Code</label>
+            <input type="text" class="form-control" id="access_code" name="inputAccessCode" placeholder="" value="{{config.access_code}}" />
+            <span class="help-block">
+              Set an Access Code for this customer to enter before signing documents
+            </span>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="authentication">Additional Authentication</label>
+            <select class="form-control" name="inputAuthentication" disabled>
+              {{#each authentication_options}}
+                <option value="{{this}}" {{#ifCond this "==" ../config.authentication}}selected{{/ifCond}}>
+                  {{this}}
+                </option>
+              {{/each}}
+            </select>
+            <span class="help-block">
+              Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
+              <br />
+              * This can be enabled when using your own account 
+            </span>
+          </div>
+        </div>
+
+
+        <hr />
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="inputCosignerCheckbox" name="inputCosignerCheckbox" /> Include Cosigner
+          </label>
+        </div>
+        <div class="cosigner" style="display:none;">
+          <h3>
+            CoSigner Information
+          </h3>
+          <div class="form-group">
+            <label for="inputCosignerFirstName">First Name</label>
+            <input type="text" class="form-control" id="inputCosignerFirstName" name="inputCosignerFirstName" placeholder="" required value="James" />
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="inputCosignerLastName">Last Name</label>
+            <input type="text" class="form-control" id="inputCosignerLastName" name="inputCosignerLastName" placeholder="" required value="Wilson" />
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="inputCosignerEmail">Email Address</label>
+            <input type="email" class="form-control" id="inputCosignerEmail" name="inputCosignerEmail" placeholder="" value="{{default_email}}" />
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="inputCosignerPhone">Phone Number</label>
+            <input type="tel" class="form-control" id="inputCosignerPhone" name="inputCosignerPhone" placeholder="" value="" />
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <p>
+            <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvancedCosigner" aria-expanded="false" aria-controls="collapseAdvancedCosigner">
+              <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+            </span>
+          </p>
+          <div class="collapse" id="collapseAdvancedCosigner">
+
+            <div class="form-group">
+              <label for="input">Signing Location</label>
+              <select class="form-control" name="inputSigningLocationCosigner">
+                {{#each signing_location_options}}
+                  <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                    {{this}}
+                  </option>
+                {{/each}}
+              </select>
+
+              <span class="help-block">
+                Embed the signing experience, or send an email (remote) 
+              </span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label for="access_codeCosigner">Access Code</label>
+              <input type="text" class="form-control" id="access_codeCosigner" name="inputAccessCodeCosigner" placeholder="" value="{{config.access_code}}" />
+              <span class="help-block">
+                Set an Access Code for this customer to enter before signing documents
+              </span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label for="authenticationCosigner">Additional Authentication</label>
+              <select class="form-control" name="inputAuthenticationCosigner" disabled>
+                {{#each authentication_options}}
+                  <option value="{{this}}" {{#ifCond this "==" ../config.authentication}}selected{{/ifCond}}>
+                    {{this}}
+                  </option>
+                {{/each}}
+              </select>
+              <span class="help-block">
+                Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
+                <br />
+                * This can be enabled when using your own account 
+              </span>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+        <hr />
+
+        <h4>
+          Financials
+        </h4>
+        <div class="form-group">
+          <label for="inputLoanAmount">Desired Loan Amount</label>
+          <div>
+            <input type="number" class="form-control" id="inputLoanAmount" name="inputLoanAmount" placeholder="" required value="36000" style="display:inline-block;width:80px;text-align:center;" /> dollars
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputLoanLength">Repayment Terms</label>
+          <div>
+            <input type="number" class="form-control" id="inputLoanLength" name="inputLoanLength" placeholder="" required value="36" style="display:inline-block;width:80px;text-align:center;" /> months
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-primary has-spinner">
+              Start Auto Loan Application
+              <span class="spinner"><i class="fa fa-spinner fa-spin icon-spin"></i></span>
+            </button>
+          </div>
+        </div>
+
+
+      </form>
+
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('#inputCosignerCheckbox').on('click', function(){
+            $('.cosigner').toggle();
+            if($(this).is(':checked')){
+              $('#inputCosignerEmail').attr('required',true);
+            } else {
+              console.log('removed');
+              $('#inputCosignerEmail').removeAttr('required');
+            }
+          });
+
+        });
+      </script>
+
+    </div>
+
+    <div class="col-sm-6">
+
+      <h2 class="text-center" style="opacity:0;">
+        Auto Loan Application
+      </h2>
+
+      <hr />
+
+      <p class="text-right2">
+        <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
+          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> See behind the scenes
+        </span>
+      </p>
+      <div class="collapse" id="collapseHow">
+
+        <hr />
+
+        <h4>
+          This Sample Features:
+        </h4>
+        <ul>
+          <li>Send from a Template</li>
+          <li>Mutiple Signers</li>
+          <li>Mutiple Documents</li>
+          <li>Calculated (Formula) Tabs</li>
+        </ul>
+
+        <br />
+
+
+        <h4>
+          Code Flow: 
+        </h4>
+
+        <h5>
+          Step 1
+        </h5>
+
+        <p>
+          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to create the signature request with the corresponding form information. Since we are using a Template in this case the <code>templateId</code> property is used to apply a given template to the envelope and the <code>templateRoles</code> node is used to assign recipient(s) to roles within the template. 
+        </p>
+          
+        <p>                  
+          To match a recipient to a role we use the <code>roleName</code> property, which must exactly match the role name saved in the template. We do this for both our Applicant and Cosigner. To set default tab values for each role we use the <code>tabs</code> node just like we did when in the first loan example, except here we omit any positioning information since that is saved within the template.
+        </p>
+
+        <p>                  
+          To identify and populate a given tab we use the <code>tabLabel</code> and <code>value</code> properties, respectively. And once again to use embedded signing we must set the <code>clientUserId</code> property for each recipient (or template role in this case).
+        </p>
+
+        <p>
+          To create and send an envelope from a template send an http POST request to:
+        
+<pre>
+POST /v2/accounts/{accountId}/envelopes
+</pre>
+
+        <p style="padding:20px 0;">
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON" aria-expanded="false" aria-controls="collapseJSON">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+          </span>
+        </p>
+        <div class="collapse" id="collapseJSON">
+<pre>
+{
+  "status": "sent",
+  "emailSubject": "Auto Loan Application",
+  "emailBlurb": "Please sign the Loan application to start the application process.",
+  "documents": [],
+  "templateId": "ea7c6390-9ee5-4dcb-8319-c87b6a9dc7d8",
+  "templateRoles": [
+    {
+      "email": "-- RECIPIENT EMAIL HERE --",
+      "roleName": "applicant",
+      "name": "-- RECIPIENT NAME HERE --",
+      "clientUserId": "1001",
+      "tabs": {
+        "textTabs": [
+          {
+            "tabLabel": "Phone",
+            "recipientId": "1",
+            "value" : "5555555555"
+          }
+        ]
+      },
+      "recipientId": "1"
+    },
+    {
+      "email": "-- RECIPIENT (COSIGNER) EMAIL HERE --",
+      "roleName": "cosigner",
+      "name": "-- RECIPIENT (COSIGNER) NAME HERE --",
+      "clientUserId": "2002",
+      "tabs": {
+        "textTabs": [
+          {
+            "tabLabel": "PhoneCosigner",
+            "recipientId": "2"
+          }
+        ]
+      },
+      "recipientId": "2"
+    },
+    {
+      "email": "-- INTERNAL EMPLOYEE EMAIL HERE --",
+      "roleName": "employee",
+      "name": "-- INTERNAL EMPLOYEE NAME HERE --"
+    }
+  ]
+}
+</pre>
+        </div>
+
+        <h5>
+          Step 2
+        </h5>
+
+        <p>
+          If Embedded Signing was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
+        </p>
+
+        <p>
+          Once the envelope is sent we save the envelope ID and Recipient information to our session then redirect to the <tt>/sign/embedded</tt> page. There we retrieve the envelope ID and recipient info from our session and create the recipient view by generating the URL and displaying in a full-width and full-height iframe.
+        </p>
+
+        <br />
+        
+        <p>
+          To create the recipient view of the envelope we send an http POST request to:
+        
+<pre>
+POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
+</pre>
+        </p>
+        <p style="padding:20px 0;">
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
+          </span>
+        </p>
+        <div class="collapse" id="collapseJSON2">
+<pre>
+{
+  "clientUserId": "1001",
+  "userName": "-- RECIPIENT NAME HERE --",
+  "email": "-- RECIPIENT EMAIL HERE --",
+  "recipientId": "1",
+  "returnUrl": "-- RETURN URL HERE --",
+  "authenticationMethod": "email"
+}
+</pre>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  {{> footer}}
+
+</div>
+

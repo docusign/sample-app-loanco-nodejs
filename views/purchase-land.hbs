@@ -1,0 +1,383 @@
+
+{{> header}}
+
+<div class="container">
+
+  <div id="error-why"></div>
+
+  <div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+
+      <h2 class="text-center">
+        Land Purchase Agreement
+      </h2>
+
+      <hr />
+
+      <form id="mainForm1" data-toggle="validator" method="POST" action="/purchase/land">
+
+
+        <h3>
+          Sales Rep (Host) 
+        </h3>
+
+        <p>
+          This is the "Host" of the signing session and will receive an email to begin the signing ceremony. 
+        </p>
+
+        <div class="form-group">
+          <label for="inputSalesFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputSalesFirstName" name="inputSalesFirstName" placeholder="" required value="Sales">
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputSalesLastName">Last Name</label>
+          <input type="text" class="form-control" id="inputSalesLastName" name="inputSalesLastName" placeholder="" required value="McRep">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputSalesEmail">Email Address</label>
+          <input type="email" class="form-control" id="inputSalesEmail" name="inputSalesEmail" placeholder="" required value="{{default_email}}">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="input">Signing Location</label>
+          <select class="form-control" name="inputSigningLocation">
+            {{#each signing_location_options}}
+              <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                {{this}}
+              </option>
+            {{/each}}
+          </select>
+
+          <span class="help-block">
+            Embed the signing experience, or send an email (remote) 
+          </span>
+          <div class="help-block with-errors"></div>
+        </div>
+
+
+        <hr />
+
+
+        <h3>
+          Purchaser (In-Person Signer) 
+        </h3>
+
+        <div class="form-group">
+          <label for="inputPurchaserFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputPurchaserFirstName" name="inputPurchaserFirstName" placeholder="" required value="Edgar">
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputPurchaserLastName">Last Name</label>
+          <input type="text" class="form-control" id="inputPurchaserLastName" name="inputPurchaserLastName" placeholder="" required value="Holmes">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPurchaserEmail">Email Address</label>
+          <input type="email" class="form-control" id="inputPurchaserEmail" name="inputPurchaserEmail" placeholder="" required value="{{default_email}}">
+          <div class="help-block with-errors"></div>
+        </div>
+
+
+        <hr />
+
+
+
+        <h3>
+          Developer (Print and Sign) 
+        </h3>
+
+        <div class="form-group">
+          <label for="inputDevFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputDevFirstName" name="inputDevFirstName" placeholder="" required value="Dev">
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputDevLastName">Last Name</label>
+          <input type="text" class="form-control" id="inputDevLastName" name="inputDevLastName" placeholder="" required value="Eloper">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputDevEmail">Email Address</label>
+          <input type="email" class="form-control" id="inputDevEmail" name="inputDevEmail" placeholder="" required value="{{default_email}}">
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="inputDevForceWet" name="inputDevForceWet" /> Require Paper Signature 
+          </label>
+        </div>
+
+
+        <hr />
+
+        <h4>
+          Financials
+        </h4>
+        <div class="form-group">
+          <label for="inputLandCost">Land Cost</label>
+          <div>
+            <input type="number" class="form-control" id="inputLandCost" name="inputLandCost" placeholder="" required value="36000" style="display:inline-block;width:80px;text-align:center;" /> dollars
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-primary has-spinner">
+              Begin Signing
+              <span class="spinner"><i class="fa fa-spinner fa-spin icon-spin"></i></span>
+            </button>
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+
+    <div class="col-sm-6">
+
+      <h2 class="text-center" style="opacity:0;">
+        Land Purchase Agreement
+      </h2>
+
+      <hr />
+
+      <p class="text-right2">
+        <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
+          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> See behind the scenes
+        </span>
+      </p>
+      <div class="collapse" id="collapseHow">
+
+        <hr />
+
+        <h4>
+          This Sample Features:
+        </h4>
+        <ul>
+          <li>In Person Signing (<a href="https://www.docusign.com/supportdocs/cdse-user-guide/Content/signing/in-person-signing.htm" target="_blank">more info</a>)</li>
+          <li>Require Sign on Paper</li>
+          <li>Routing Order</li>
+        </ul>
+
+        <br />
+
+
+        <h4>
+          Code Flow: 
+        </h4>
+
+        <h5>
+          Step 1
+        </h5>
+
+        <p>
+          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to create the signature request with the corresponding form information. We are adding a single, local DOCX (Word) file to the envelope, and we have two signers (the Sales Rep is our "Host" for the In Person Signing session). 
+        </p>
+          
+        <p>                  
+          Our Sales Rep is the "Host" of the In Person Signing session, which means they will receive the "Start Signing" email from DocuSign (if we chose "remote" signing instead of "embedded" for the Purchaser). When the Signing Ceremony begins, the Host will be asked to turn over control of the screen for the Purchaser to review and sign. 
+        </p>
+
+        <p>
+          We are using a <code>Routing Order</code> in our envelope to ensure that the Purchaser signs before the Developer. 
+        </p>
+
+        <p>
+          We also include the ability to Require Paper Signing for the Developer, which means they will need to Print or Download the documents, sign them on paper, and then scan and upload, or fax, the signed documents back to DocuSign. 
+
+          <br />
+
+          <strong>Note: </strong> if you receive an error message when running this yourself, please view the <a href="https://github.com/docusign/sample-app-loanco-nodejs/blob/master/README.md" target="_blank">README</a> for settings your account may be missing. 
+        </p>
+
+        <p>
+          To create and send an envelope from a template send an http POST request to:
+        
+<pre>
+POST /v2/accounts/{accountId}/envelopes
+</pre>
+
+        <p style="padding:20px 0;">
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON" aria-expanded="false" aria-controls="collapseJSON">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+          </span>
+        </p>
+        <div class="collapse" id="collapseJSON">
+<pre>
+{
+  "status": "sent",
+  "emailSubject": "Land Purchase Agreement",
+  "emailBlurb": "Please sign the Agreement",
+  "documents": [
+    {
+      "documentId": "1",
+      "name": "Document",
+      "fileExtension": "docx",
+      "documentBase64": "-- Base64-encoding document bytes are here --"
+    }
+  ],
+  "recipients": {
+    "inPersonSigners": [
+      {
+        "hostName": "-- Sales Rep (Host) Name Here --",
+        "hostEmail": "-- Sales Rep (Host) Email Here --",
+        "signerName": "-- Purchaser Name Here --",
+        "signerEmail": "-- Purchaser Email Here --",
+        "tabs": {
+          "signHereTabs": [
+            {
+              "recipientId": "1",
+              "anchorString": "Purchaser Signature",
+              "anchorXOffset": "178",
+              "anchorYOffset": "14"
+            }
+          ],
+          "fullNameTabs": [
+            {
+              "recipientId": "1",
+              "anchorString": "Purchaser Full Name",
+              "anchorXOffset": "178",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "numberTabs": [
+            {
+              "name": "LandCost",
+              "value": "36000",
+              "locked": "true",
+              "tabLabel": "LandCost",
+              "recipientId": "1",
+              "anchorString": "Land Cost",
+              "anchorXOffset": "105",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "emailTabs": [
+            {
+              "name": "Email",
+              "value": "-- Purchaser Email Here --",
+              "tabLabel": "Email",
+              "recipientId": "1",
+              "anchorString": "Purchaser Email",
+              "anchorXOffset": "155",
+              "anchorYOffset": "-2"
+            }
+          ]
+        },
+        "recipientId": "1",
+        "clientUserId": "1001",
+        "routingOrder": "1"
+      }
+    ],
+    "signers": [
+      {
+        "tabs": {
+          "signHereTabs": [
+            {
+              "recipientId": "2",
+              "anchorString": "Developer Signature",
+              "anchorXOffset": "158",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "fullNameTabs": [
+            {
+              "recipientId": "2",
+              "anchorString": "Developer Full Name",
+              "anchorXOffset": "158",
+              "anchorYOffset": "-2"
+            }
+          ],
+          "emailTabs": [
+            {
+              "name": "Email",
+              "value": "-- Developer Email Here --",
+              "tabLabel": "Email",
+              "recipientId": "2",
+              "anchorString": "Developer Email",
+              "anchorXOffset": "155",
+              "anchorYOffset": "-2"
+            }
+          ]
+        },
+        "name": "-- Developer Name Here --",
+        "email": "-- Developer Email Here --",
+        "recipientId": "2",
+        "routingOrder": "2"
+      }
+    ]
+  }
+}
+</pre>
+        </div>
+
+        <h5>
+          Step 2
+        </h5>
+
+        <p>
+          If Embedded Signing was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
+
+          <br />
+
+          <strong>Note: </strong> make sure to use the host's name and email when requesting the Embedded Signing url!  
+        </p>
+
+        <p>
+          Once the envelope is sent we save the envelope ID and Recipient information to our session then redirect to the <tt>/sign/embedded</tt> page. There we retrieve the envelope ID and recipient info from our session and create the recipient view by generating the URL and displaying in a full-width and full-height iframe.
+        </p>
+
+        <br />
+        
+        <p>
+          To create the recipient view of the envelope we send an http POST request to:
+        
+<pre>
+POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
+</pre>
+        </p>
+        <p style="padding:20px 0;">
+          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
+          </span>
+        </p>
+        <div class="collapse" id="collapseJSON2">
+<pre>
+{
+  "clientUserId": "1001",
+  "userName": "-- SALES REP (HOST) NAME HERE --",
+  "email": "-- SALES REP (HOST) EMAIL HERE --",
+  "recipientId": "1",
+  "returnUrl": "-- RETURN URL HERE --",
+  "authenticationMethod": "email"
+}
+</pre>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  {{> footer}}
+
+</div>
+
