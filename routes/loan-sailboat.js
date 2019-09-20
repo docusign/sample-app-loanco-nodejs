@@ -305,7 +305,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 		envDef.status = 'sent';
 
 		if(app.config.brand_id && app.config.brand_id.length){
-			envDef.setBrandId(app.config.brand_id);
+			envDef.brandId = app.config.brand_id;
 		}
 
 		// set the required authentication information
