@@ -108,19 +108,13 @@ Contact Support (support@docusign.com) and request "Allow Require Wet Sign" to b
 
 
 
-#### API Tools and Links
+#### Additional Resources
 
-__Developer Center__  
-https://developers.docusign.com
+* [DocuSign Developer Center](https://developers.docusign.com)
+* [DocuSign API on Twitter](https://twitter.com/docusignapi)
+* [DocuSign For Developers on LinkedIn](https://www.linkedin.com/showcase/docusign-for-developers/)
+* [DocuSign For Developers on YouTube](https://www.youtube.com/channel/UCJSJ2kMs_qeQotmw4-lX2NQ)
 
-__API Code Examples__  
-https://developers.docusign.com/esign-rest-api/code-examples
-
-__API Documentation__  
-https://developers.docusign.com/esign-rest-api/reference
-
-__API Explorer__  
-https://apiexplorer.docusign.com/  
 
 
 
