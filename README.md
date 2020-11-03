@@ -5,7 +5,7 @@ LoanCo is a sample loan app that shows some common ways an application might int
 
 #### Requirements
 
-- [Free Developer Sandbox](https://go.docusign.com/sandbox/productshot?elq=16799)
+- [Free Developer Account(https://go.docusign.com/sandbox/productshot?elq=16799)
 - [Node.js](https://nodejs.org/en/)
 
 
