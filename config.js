@@ -29,7 +29,7 @@ config.auth = {
 config.brand_id = process.env.BRAND_ID;
 config.google_maps_api_key = process.env.GOOGLE_MAPS_API_KEY;
 config.default_email = process.env.DEFAULT_EMAIL;
-config.force_https = process.env.FORCE_HTTPS == 'true' ? true:false; // change to false!
+config.session_secret = process.env.SESSION_SECRET;
 
 app.locals.googletag = process.env.GOOGLE_TAG_MANAGER;
 
