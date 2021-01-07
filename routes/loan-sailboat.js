@@ -3,7 +3,7 @@ var router = express.Router();
 
 var _ = require('lodash');
 
-var GoogleMapsAPI = require('googlemaps');
+const GoogleMapsAPI = require('static-google-map');
 
 var docusign = require('docusign-esign'),
   async = require('async'),
@@ -28,15 +28,8 @@ router.post('/loan/sailboat', function(req, res, next) {
 
 	var body = req.body;
 
-	// Get Google map
-	var gmAPI = new GoogleMapsAPI({
-		key: app.config.google_maps_api_key,
-		// stagger_time:       1000, // for elevationPath
-		// encode_polylines:   false,
-		// secure:             true, // use https
-		// proxy:              'http://127.0.0.1:9999' // optional, set a proxy for HTTP requests
-	});
 	var params = {
+	  key: app.config.google_maps_api_key,
 	  center: '37.808546, -122.409767',
 	  zoom: 15,
 	  size: '500x400',
@@ -59,7 +52,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 	};
 	
 	// Download the map 
-	var gmApiImageUrl = gmAPI.staticMap(params);
+	const gmApiImageUrl = GoogleMapsAPI.staticMapUrl(params);
 	var request = require('request').defaults({ encoding: null });
 	request.get(gmApiImageUrl, function (mapErr, response, imageBody) {
 		if(mapErr){
