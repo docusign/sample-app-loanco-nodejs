@@ -50,7 +50,7 @@ __Source on GitHub: <a target="_blank" href="https://github.com/DocuSign/sample-
 
 ### About DocuSign 
 
-* More than __200 million users__ in __188 countries__
+* More than __600 million users__ in __188 countries__
 * More than 300,000 companies
 * More than 300,000 new unique users join The DocuSign Global Trust Network every day
 * More than 64% of documents are completed within one hour

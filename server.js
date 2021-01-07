@@ -107,7 +107,7 @@ app.models = require('./models');
 
 var session = require('express-session');
 app.use(session({
-  secret: 'kjh2398sh2nlsd',
+  secret: app.config.session_secret,
   resave: false,
   saveUninitialized: false
 }));
@@ -186,35 +186,35 @@ app.use(function(err, req, res, next) {
 });
 
 
-// Create the HTTP and HTTPS servers
-var server = require('http').Server(app);
-var httpsServer;
-try {
-  var privateKey = fs.readFileSync('sslcerts/server.key');
-  var certificate = fs.readFileSync('sslcerts/server.crt');
+// Create and start the HTTP server
+ var server = require('http').Server(app);
+ server.listen(3801, function() {
+  console.log('HTTP being served on 3801');});
 
-  var credentials = configWithCryptoOptions({
-    key: privateKey,
-    cert: certificate
-  });
+//Create and start the HTTPS server
+var useHttps = fs.existsSync('/server.key') && fs.existsSync('/server.crt');
+if(useHttps){
+  var privateKey = fs.readFileSync('server.key');
+  var certificate = fs.readFileSync('server.crt');
+  var httpsServer;
+  try {
+      var credentials = configWithCryptoOptions({
+        key: privateKey,
+        cert: certificate
+      });
+    
+      httpsServer = require('https').Server(credentials, app);
+  }catch(err){
+    console.error('HTTPS server failed to start. Missing key or crt');
+  }
 
-  httpsServer = require('https').Server(credentials, app);
-}catch(err){
-  console.error('HTTPS server failed to start. Missing key or crt');
+  httpsServer && httpsServer.listen(4443, function() {
+  console.log('HTTPS being served on 4443');});
 }
 
 app.setup = require('./setup');
 
-
-////////////////////////////////////////////////
-// Start the server
-////////////////////////////////////////////////
-server.listen(3801, function() {
-  console.log('HTTP being served on 3801');});
-
-httpsServer && httpsServer.listen(4443, function() {
-  console.log('HTTPS being served on 4443');});
-server.on('error', onError);
+app.on('error', onError);
 
 function onError(error) {
   if (error.syscall !== 'listen') {

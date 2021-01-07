@@ -5,7 +5,7 @@ LoanCo is a sample loan app that shows some common ways an application might int
 
 #### Requirements
 
-- [Free Developer Account](https://go.docusign.com/sandbox/productshot?elq=16799)
+- [Free Developer Account](https://go.docusign.com/o/sandbox)
 - [Node.js](https://nodejs.org/en/)
 
 
@@ -14,8 +14,11 @@ LoanCo is a sample loan app that shows some common ways an application might int
 	git clone <repo> 
 	cd <repo directory>
 	npm install
-    npm start
 
+**Optional**
+### Using an https server
+
+1. Follow [these instructions](https://devcenter.heroku.com/articles/ssl-certificate-self) to generate a private key, certificate signing request, and SSL certificate. These should be stored in the root directory in files named server.key, server.csr, and server.crt respectively.
 
 #### Running 
 
@@ -31,6 +34,7 @@ We use environment variables to setup our configuration. You can store these var
 
 	DOCUSIGN_ENVIRONMENT=demo  // use "www" for production  
 	DOCUSIGN_IK=               // Integration Key 
+    DOCUSIGN_CLIENT_SECRET=    // Client Secret
 	EMPLOYEE_EMAIL=            // used for final recipient of Personal Loan
 	EMPLOYEE_NAME=             // used for final recipient of Personal Loan
 	LOCAL_RETURN_URL=http://localhost/   // change to the correct return url, with a trailing slash
@@ -39,7 +43,7 @@ We use environment variables to setup our configuration. You can store these var
     GOOGLE_TAG_MANAGER=        // GTM-XYZ
 	DEFAULT_EMAIL=             // for autofilling email input fields
     FORCE_HTTPS=               // force https by setting to true
-
+    SESSION_SECRET=            // used to compute the hash value of the session, any number would do.
 
 ##### Templates 
 
