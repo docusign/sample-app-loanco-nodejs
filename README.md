@@ -15,11 +15,6 @@ LoanCo is a sample loan app that shows some common ways an application might int
 	cd <repo directory>
 	npm install
 
-**Optional**
-### Using an https server
-
-1. Follow [these instructions](https://devcenter.heroku.com/articles/ssl-certificate-self) to generate a private key, certificate signing request, and SSL certificate. These should be stored in the root directory in files named server.key, server.csr, and server.crt respectively.
-
 #### Running 
 
 	npm start
@@ -45,7 +40,11 @@ We use environment variables to setup our configuration. You can store these var
     FORCE_HTTPS=               // force https by setting to true
     SESSION_SECRET=            // used to compute the hash value of the session, any number would do.
 
-##### Templates 
+#### Using an https server
+*Optional*
+1. Follow [these instructions](https://devcenter.heroku.com/articles/ssl-certificate-self) to generate a private key, certificate signing request, and SSL certificate. These should be stored in the root directory in files named server.key, server.csr, and server.crt respectively.
+
+#### Templates 
 
 Templates are not currently automatically created. To create the Auto Loan template, follow these steps: 
 

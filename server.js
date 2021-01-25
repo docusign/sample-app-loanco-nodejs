@@ -192,7 +192,7 @@ app.use(function(err, req, res, next) {
   console.log('HTTP being served on 3801');});
 
 //Create and start the HTTPS server
-var useHttps = fs.existsSync('/server.key') && fs.existsSync('/server.crt');
+var useHttps = fs.existsSync('server.key') && fs.existsSync('server.crt');
 if(useHttps){
   var privateKey = fs.readFileSync('server.key');
   var certificate = fs.readFileSync('server.crt');
