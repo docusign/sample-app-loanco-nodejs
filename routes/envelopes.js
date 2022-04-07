@@ -75,7 +75,13 @@ router.get('/envelopes', function(req, res, next){
 	.exec(function(err, envelopes){
 		console.log(JSON.stringify(envelopes,null,2));
 		res.render('envelopes',{
-			envelopes: envelopes
+			envelopes: envelopes,
+			locale: {
+				"ApiDescription": {
+					"SeeMore": "See more",
+					"CodeFlow": "<h3>This sample features:</h3><ul><li>Some features</li><li>Some features</li></ul><h3>Code flow:</h3><h5>Step 1</h5><p>Some describtion of the steps</p><p>To create the recipient view of the envelope, we send an API request to:</p><pre>POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient</pre><h5>Step 2</h5><p>Some describtion of the steps</p><p>To create the recipient view of the envelope, we send an API request to:</p><pre>POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient</pre>"
+				}
+			}
 		});
 	});
 });
