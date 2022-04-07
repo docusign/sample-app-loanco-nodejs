@@ -4,81 +4,89 @@
 <div class="container">
 
 	{{#if envelopes}}
-
 		<br />
 
 		<h3>
 			Submissions Status
 		</h3>
 
-	    <p class="h3-hint">
-	      Only available in your current session. (<a href="/restart-session">restart session</a>)
-	    </p>
+		<p class="h3-hint">
+		Only available in your current session. (<a href="/restart-session">restart session</a>)
+		</p>
+		<div class="row">
+			<div class="col-lg-6">
+				<table class="table table-minimal">
+					<thead>
+						<th>
+							Subject
+						</th>
+						<th>
+							Applicant
+						</th>
+						<th>
+							Last Updated
+						</th>
+						<th>
+							
+						</th>
+					</thead>
+					<tbody>
+						{{#each envelopes}}
+							<tr>
+								<td>
+									{{data.emailSubject}}
+								</td>
+								<td>
+									{{recipients.signers.[0].name}}
+									{{#ifCond recipients.signers.length ">" 1}}
+										&amp; {{recipients.signers.[1].name}}
+									{{/ifCond}}
+								</td>
+								<td>
+									{{moment lastUpdate fromNow=null}}
+								</td>
+								<td>
+									<div class="dropdown">
+										<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+											Options
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											{{#each documents}}
+												<li><a href="/envelopes/{{../data.envelopeId}}/download/{{documentId}}" target="_blank">Download {{name}}</a></li>
+											{{/each}}
+											<li role="separator" class="divider"></li>
+											<li><a href="/envelopes/{{envelopeId}}/download/combined" target="_blank">Download Combined</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		
+		
+			<div class="col-lg-6 pt-2 pb-4">
+				{{#if locale}}
+					<p class="text-right2">
+					<span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
+						<i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i>
+						<i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> 
+						{{locale.ApiDescription.SeeMore}}
+							</span>
+					</p>
 
-		<table class="table table-minimal">
-			<thead>
-				<th>
-					Subject
-				</th>
-				<th>
-					Applicant
-				</th>
-				<th>
-					Last Updated
-				</th>
-				<th>
-					
-				</th>
-			</thead>
-			<tbody>
-				{{#each envelopes}}
-					<tr>
-						<td>
-							{{data.emailSubject}}
-						</td>
-						<td>
-							{{recipients.signers.[0].name}}
-							{{#ifCond recipients.signers.length ">" 1}}
-								&amp; {{recipients.signers.[1].name}}
-							{{/ifCond}}
-						</td>
-						<td>
-							{{moment lastUpdate fromNow=null}}
-						</td>
-						<td>
-							<div class="dropdown">
-							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							    Options
-							    <span class="caret"></span>
-							  </button>
-							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							  	{{#each documents}}
-							    	<li><a href="/envelopes/{{../data.envelopeId}}/download/{{documentId}}" target="_blank">Download {{name}}</a></li>
-							  	{{/each}}
-							  	<li role="separator" class="divider"></li>
-							    <li><a href="/envelopes/{{envelopeId}}/download/combined" target="_blank">Download Combined</a></li>
-							  </ul>
-							</div>
-						</td>
-					</tr>
-				{{/each}}
-			</tbody>
-		</table>
-
-		<p class="text-right2">
-      <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
-        <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> 
-      	{{locale.ApiDescription.SeeMore}}
-			</span>
-    </p>
-
-		<div class="collapse" id="collapseHow">
-			{{{locale.ApiDescription.CodeFlow}}}
+					<div class="collapse" id="collapseHow">
+						{{{locale.ApiDescription.CodeFlow}}}
+					</div>
+				{{/if}}
+			</div>
 		</div>
+		
 	{{else}}
 
 		<div class="text-center">
-
 			<br />
 
 			<h3>
@@ -86,8 +94,6 @@
 			</h3>
 
 			<br />
-
-
 		</div>
 
 	{{/if}}
