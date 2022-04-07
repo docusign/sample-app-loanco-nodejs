@@ -147,6 +147,9 @@ app.use('/', function(req, res, next){
     req.session.config[key] = (key in req.session.config) ? req.session.config[key] : app.config[key];
   });
 
+  // set the locale
+  req.session.config['locale'] = 'en';
+
   console.log('req.session end:', JSON.stringify(req.session));
   next();
 });
