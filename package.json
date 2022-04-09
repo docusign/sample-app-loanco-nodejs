@@ -24,7 +24,7 @@
     "lodash": "^4.17.21",
     "marked": "^4.0.12",
     "memorystore": "^1.6.7",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "morgan": "^1.10.0",
     "nedb": "1.8.0",
     "passport": "^0.5.2",
