@@ -75,7 +75,7 @@ router.get('/envelopes', function(req, res, next){
 	.exec(function(err, envelopes){
 		console.log(JSON.stringify(envelopes,null,2));
 		const localeLanguage = req.session.config['locale'] || 'en';
-		const locale = require(`./../locales/${localeLanguage}/Status.json`);
+		const locale = require(`../locales/${localeLanguage}/Status.json`);
 		res.render('envelopes',{
 			envelopes: envelopes,
 			locale: locale
