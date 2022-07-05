@@ -60,7 +60,6 @@ setup.InsertTemplate = function(req, templateObj){
     templateJson.envelopeTemplateDefinition = {}; // required, but fine to be empty
 
     // load json into constructor
-    var templateDef = new docusign.EnvelopeTemplateDefinition();
     try {
       var template = new docusign.EnvelopeTemplate.constructFromObject(templateJson);
     }catch(err){
