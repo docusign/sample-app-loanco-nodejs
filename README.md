@@ -98,7 +98,7 @@ Code:
         message: 'This Account lacks sufficient permissions. Document Visibility has been specified.  This account does not have document visibility turned on.' 
     }
 
-Note: A document cannot be hidden from a recipient if the recipient has tabs assigned to them on the document. Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all documents.Important: You must enable document visibility in your account to complete this how-to. In [Sending Settings](https://admindemo.docusign.com/authenticate?goTo=sending), “Document Visibility” must be set to one of the following as shown in the image:
+Note: A document cannot be hidden from a recipient if the recipient has tabs assigned to them on the document. Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all documents. Important: You must enable document visibility in your account to complete this how-to. In [Sending Settings](https://admindemo.docusign.com/authenticate?goTo=sending), “Document Visibility” must be set to one of the following:
 'Sender can set "must sign to view, unless a member of sending account"', or
 'Sender can set "must sign to view unless sender"'
 
@@ -111,7 +111,7 @@ See the Document Visibility section in [Fields and Properties](https://support.d
         message: 'A requested plan item is not enabled for this account. Plan item: AllowRequireWetSign' 
     }
 
-Contact Support (https://support.docusign.com/s/contactSupport?language=en_US) and request "Allow Require Wet Sign" to be enable on your account, and then change this on https://admindemo.docusign.com/authenticate?goTo=sending go to **Signing Settings** and find this option under **Recipients**. 
+Contact Support (https://support.docusign.com/s/contactSupport?language=en_US) and request "Allow Require Wet Sign" to be enable on your account, and then change this on https://admindemo.docusign.com/authenticate?goTo=sending. Go to **Signing Settings** and find this option under **Recipients**. 
 
 
 
