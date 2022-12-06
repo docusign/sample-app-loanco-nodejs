@@ -22,7 +22,7 @@ LoanCo is a sample loan app that shows some common ways an application might int
 
 #### Configuration 
 
-> DocuSign has multiple ways of authenticating your app. This example is using Code Grant, which requires us to store a ClientSecret in addition to the Integration Key. read more about different authentication methods at https://developers.docusign.com/esign-rest-api/guides/authentication
+> DocuSign has multiple ways of authenticating your app. This example is using Code Grant, which requires us to store a ClientSecret in addition to the Integration Key. read more about different authentication methods at https://developers.docusign.com/platform/auth/
 
 
 We use environment variables to setup our configuration. You can store these variables in a `.env` file at the root (`dotenv` package is used) 
@@ -98,7 +98,11 @@ Code:
         message: 'This Account lacks sufficient permissions. Document Visibility has been specified.  This account does not have document visibility turned on.' 
     }
 
-Change this setting: http://imgur.com/j4VD6nd on https://admindemo.docusign.com/sending-settings
+Note: A document cannot be hidden from a recipient if the recipient has tabs assigned to them on the document. Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all documents.Important: You must enable document visibility in your account to complete this how-to. In [Sending Settings](https://admindemo.docusign.com/authenticate?goTo=sending), “Document Visibility” must be set to one of the following as shown in the image:
+'Sender can set "must sign to view, unless a member of sending account"', or
+'Sender can set "must sign to view unless sender"'
+
+See the Document Visibility section in [Fields and Properties](https://support.docusign.com/s/document-item?language=en_US&rsc_301&bundleId=pik1583277475390&topicId=xgg1583277350154.html&%3Ci%3ELANG=enus) for details about document visibility options.
 
 
 
@@ -107,7 +111,7 @@ Change this setting: http://imgur.com/j4VD6nd on https://admindemo.docusign.com/
         message: 'A requested plan item is not enabled for this account. Plan item: AllowRequireWetSign' 
     }
 
-Contact Support (support@docusign.com) and request "Allow Require Wet Sign" to be enable on your account, and then change this setting: http://imgur.com/a/mJ5WC on https://admindemo.docusign.com/signing-settings under "Recipients" 
+Contact Support (https://support.docusign.com/s/contactSupport?language=en_US) and request "Allow Require Wet Sign" to be enable on your account, and then change this on https://admindemo.docusign.com/authenticate?goTo=sending under "Recipients" 
 
 
 
