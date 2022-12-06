@@ -111,7 +111,7 @@ See the Document Visibility section in [Fields and Properties](https://support.d
         message: 'A requested plan item is not enabled for this account. Plan item: AllowRequireWetSign' 
     }
 
-Contact Support (https://support.docusign.com/s/contactSupport?language=en_US) and request "Allow Require Wet Sign" to be enable on your account, and then change this on https://admindemo.docusign.com/authenticate?goTo=sending go to *Signing Settings* and find this option under "Recipients." 
+Contact Support (https://support.docusign.com/s/contactSupport?language=en_US) and request "Allow Require Wet Sign" to be enable on your account, and then change this on https://admindemo.docusign.com/authenticate?goTo=sending go to **Signing Settings** and find this option under **Recipients**. 
 
 
 
