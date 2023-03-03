@@ -26,7 +26,7 @@ app.helpers = require('./helpers');
 app.locals.default_email = app.config.default_email;
 
 // view engine setup
-app.engine('hbs', exphbs({
+app.engine('hbs', exphbs.engine({
   defaultLayout: 'main',
   extname: '.hbs',
   helpers: {
