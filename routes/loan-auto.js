@@ -13,6 +13,7 @@ router.get('/loan/auto', function(req, res, next) {
     let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
     if (! tokenOK) {
 		req.session.loan = 'auto';
+		res.locals.session.loan = 'auto';
 		dsAuthCodeGrant.prototype.login(req, res, next)    
 	}
 	else {	

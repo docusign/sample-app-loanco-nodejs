@@ -15,6 +15,7 @@ router.get('/loan/sailboat', function(req, res, next) {
     let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
     if (! tokenOK) {
 		req.session.loan = 'sailboat';
+		res.locals.session.loan = 'sailboat';
 		dsAuthCodeGrant.prototype.login(req, res, next)    
 	}
 	else {	
