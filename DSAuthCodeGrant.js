@@ -108,7 +108,8 @@ DSAuthCodeGrant.prototype.oauth_callback2 = function _oauth_callback2(req, res, 
 
     this.getDefaultAccountInfo(req);
 
-		res.render('loan-' + req.session.loan, {
+    const loan = `loan-${req.session.loan || res.locals.session.loan}`;
+		res.render(loan, {
 			signing_location_options: app.helpers.signing_location_options,
 			authentication_options: app.helpers.authentication_options
 		});
