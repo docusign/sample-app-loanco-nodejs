@@ -49,9 +49,9 @@ helpers.getLocalDocument = function getLocalDocument(filepath){
 helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, callback){
 
   // set the url where you want the recipient to go once they are done signing
-    // - this can be used by your app to watch the URL and detect when signing has completed (or was canceled) 
+    // - this can be used by your app to watch the URL and detect when signing has completed (or was canceled)
     var returnUrl = new docusign.RecipientViewRequest();
-    returnUrl.returnUrl = 'http://localhost:3801/pop/' + envelopeId;
+    returnUrl.returnUrl = `${app.config.auth.LocalReturnUrl}/pop/` + envelopeId;
     returnUrl.authenticationMethod = 'email';
 
     // recipient information must match embedded recipient info we provided
@@ -120,7 +120,7 @@ helpers.removeEmptyAndNulls = function removeEmptyAndNulls(obj, hideBase64){
 }
 
 helpers.createAndSaveLocal = function createAndSaveLocal(req, envelopeId){
-  // saving the envelope locally 
+  // saving the envelope locally
   var def = Q.defer();
 
 	// set the required authentication information
@@ -161,7 +161,7 @@ helpers.createAndSaveLocal = function createAndSaveLocal(req, envelopeId){
           recipients: recipients,
           lastUpdate: new Date().getTime()
         };
-        app.models.Envelope.insert(localEnv, function (err, newLocalEnv) { 
+        app.models.Envelope.insert(localEnv, function (err, newLocalEnv) {
           def.resolve(newLocalEnv);
         });
 
