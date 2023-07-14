@@ -18,11 +18,11 @@
 
 
         <h3>
-          Sales Rep (Host) 
+          Sales Rep (Host)
         </h3>
 
         <p>
-          This is the "Host" of the signing session and will receive an email to begin the signing ceremony. 
+          This is the "Host" of the signing session and will receive an email to begin the signing ceremony.
         </p>
 
         <div class="form-group">
@@ -53,7 +53,7 @@
           </select>
 
           <span class="help-block">
-            Embed the signing experience, or send an email (remote) 
+            Embed the signing experience, or send an email (remote)
           </span>
           <div class="help-block with-errors"></div>
         </div>
@@ -63,7 +63,7 @@
 
 
         <h3>
-          Purchaser (In-Person Signer) 
+          Purchaser (In-Person Signer)
         </h3>
 
         <div class="form-group">
@@ -89,7 +89,7 @@
 
 
         <h3>
-          Developer (Print and Sign) 
+          Developer (Print and Sign)
         </h3>
 
         <div class="form-group">
@@ -111,7 +111,7 @@
 
         <div class="checkbox">
           <label>
-            <input type="checkbox" id="inputDevForceWet" name="inputDevForceWet" /> Require Paper Signature 
+            <input type="checkbox" id="inputDevForceWet" name="inputDevForceWet" /> Require Paper Signature
           </label>
         </div>
 
@@ -155,7 +155,7 @@
 
       <p class="text-right2">
         <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
-          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> See behind the scenes
+          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> See behind the scenes
         </span>
       </p>
       <div class="collapse" id="collapseHow">
@@ -175,7 +175,7 @@
 
 
         <h4>
-          Code Flow: 
+          Code Flow:
         </h4>
 
         <h5>
@@ -183,35 +183,35 @@
         </h5>
 
         <p>
-          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to create the signature request with the corresponding form information. We are adding a single, local DOCX (Word) file to the envelope, and we have two signers (the Sales Rep is our "Host" for the In Person Signing session). 
-        </p>
-          
-        <p>                  
-          Our Sales Rep is the "Host" of the In Person Signing session, which means they will receive the "Start Signing" email from DocuSign (if we chose "remote" signing instead of "embedded" for the Purchaser). When the Signing Ceremony begins, the Host will be asked to turn over control of the screen for the Purchaser to review and sign. 
+          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to create the signature request with the corresponding form information. We are adding a single, local DOCX (Word) file to the envelope, and we have two signers (the Sales Rep is our "Host" for the In Person Signing session).
         </p>
 
         <p>
-          We are using a <code>Routing Order</code> in our envelope to ensure that the Purchaser signs before the Developer. 
+          Our Sales Rep is the "Host" of the In Person Signing session, which means they will receive the "Start Signing" email from DocuSign (if we chose "remote" signing instead of "embedded" for the Purchaser). When the Signing Ceremony begins, the Host will be asked to turn over control of the screen for the Purchaser to review and sign.
         </p>
 
         <p>
-          We also include the ability to Require Paper Signing for the Developer, which means they will need to Print or Download the documents, sign them on paper, and then scan and upload, or fax, the signed documents back to DocuSign. 
+          We are using a <code>Routing Order</code> in our envelope to ensure that the Purchaser signs before the Developer.
+        </p>
+
+        <p>
+          We also include the ability to Require Paper Signing for the Developer, which means they will need to Print or Download the documents, sign them on paper, and then scan and upload, or fax, the signed documents back to DocuSign.
 
           <br />
 
-          <strong>Note: </strong> if you receive an error message when running this yourself, please view the <a href="https://github.com/docusign/sample-app-loanco-nodejs/blob/master/README.md" target="_blank">README</a> for settings your account may be missing. 
+          <strong>Note: </strong> if you receive an error message when running this yourself, please view the <a href="https://github.com/docusign/sample-app-loanco-nodejs/blob/master/README.md" target="_blank">README</a> for settings your account may be missing.
         </p>
 
         <p>
           To create and send an envelope from a template send an http POST request to:
-        
+
 <pre>
-POST /v2/accounts/{accountId}/envelopes
+POST /v2.1/accounts/{accountId}/envelopes
 </pre>
 
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON" aria-expanded="false" aria-controls="collapseJSON">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON
           </span>
         </p>
         <div class="collapse" id="collapseJSON">
@@ -332,7 +332,7 @@ POST /v2/accounts/{accountId}/envelopes
 
           <br />
 
-          <strong>Note: </strong> make sure to use the host's name and email when requesting the Embedded Signing url!  
+          <strong>Note: </strong> make sure to use the host's name and email when requesting the Embedded Signing url!
         </p>
 
         <p>
@@ -340,17 +340,17 @@ POST /v2/accounts/{accountId}/envelopes
         </p>
 
         <br />
-        
+
         <p>
           To create the recipient view of the envelope we send an http POST request to:
-        
+
 <pre>
-POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
+POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
 </pre>
         </p>
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
           </span>
         </p>
         <div class="collapse" id="collapseJSON2">
@@ -380,4 +380,3 @@ POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
   {{> footer}}
 
 </div>
-

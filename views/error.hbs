@@ -1,4 +1,12 @@
 PAGE ERROR
 <p>
-	{{error}}
+	{{#if status}}
+		{{status}}
+	{{/if}}
+	{{#if message}}
+		{{message}}
+	{{/if}}
+	{{#if error}}
+		{{error}}
+	{{/if}}
 </p>
