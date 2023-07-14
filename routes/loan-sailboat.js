@@ -12,18 +12,18 @@ var docusign = require('docusign-esign'),
   dsAuthCodeGrant = require('../DSAuthCodeGrant');
 
 router.get('/loan/sailboat', function(req, res, next) {
-    let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
+  let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
     if (! tokenOK) {
 		req.session.loan = 'sailboat';
 		res.locals.session.loan = 'sailboat';
-		dsAuthCodeGrant.prototype.login(req, res, next)    
+		dsAuthCodeGrant.prototype.login(req, res, next)
 	}
-	else {	
-		res.render('loan-sailboat', {
-			signing_location_options: app.helpers.signing_location_options,
-			authentication_options: app.helpers.authentication_options
-		});
-	}
+  else {
+    res.render('loan-sailboat', {
+      signing_location_options: app.helpers.signing_location_options,
+      authentication_options: app.helpers.authentication_options
+    });
+  }
 });
 router.post('/loan/sailboat', function(req, res, next) {
 
@@ -51,8 +51,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 		}
 	  ]
 	};
-	
-	// Download the map 
+	// Download the map
 	const gmApiImageUrl = GoogleMapsAPI.staticMapUrl(params);
 	var request = require('request').defaults({ encoding: null });
 	request.get(gmApiImageUrl, function (mapErr, response, imageBody) {
@@ -126,7 +125,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 		appraiserSigner.email = body.inputAppraiserEmail;
 		appraiserSigner.name = body.inputAppraiserFirstName + ' ' + body.inputAppraiserLastName;
 		appraiserSigner.recipientId = '2';
-		// appraiserSigner.setExcludedDocuments([]); // this is NOT the way to make all documents visible, instead we need to add a Tab to each document (if it already has a tag, otherwise un-tagged documents are always visible) 
+		// appraiserSigner.setExcludedDocuments([]); // this is NOT the way to make all documents visible, instead we need to add a Tab to each document (if it already has a tag, otherwise un-tagged documents are always visible)
 
 		if(body.inputSigningLocationAppraiser == 'embedded'){
 			appraiserSigner.clientUserId = '2002';
@@ -199,7 +198,6 @@ router.post('/loan/sailboat', function(req, res, next) {
 			anchorYOffset: '0',
 		}));
 
-
 		var tabs = new docusign.Tabs();
 		tabs.textTabs = tabList.text;
 		tabs.numberTabs = tabList.number;
@@ -226,7 +224,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 			attachment: [],
 			number: []
 		}
-		  
+
 
 		// Email
 		appraiserTabList.email.push(app.helpers.makeTab('Email', {
@@ -262,7 +260,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 			anchorYOffset: '4',
 		}));
 
-		// BLANK TEXT (on first document, to make it visible to our Appraiser) 
+		// BLANK TEXT (on first document, to make it visible to our Appraiser)
 		appraiserTabList.text.push(app.helpers.makeTab('Text', {
 			recipientId: '2',
 			documentId: '1',
@@ -285,7 +283,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 		appraiserTabs.initialHereTabs = appraiserTabList.initialHere;
 		appraiserTabs.dateSignedTabs = appraiserTabList.dateSigned;
 
-		appraiserSigner.tabs = appraiserTabs;      
+		appraiserSigner.tabs = appraiserTabs;
 
 
 		// add recipients
@@ -304,15 +302,15 @@ router.post('/loan/sailboat', function(req, res, next) {
 
 		// set the required authentication information
 		let dsApiClient = new docusign.ApiClient();
-		dsApiClient.setBasePath(req.session.basePath);
-		dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+    dsApiClient.setBasePath(req.session.basePath);
+    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
 
 		// instantiate a new EnvelopesApi object
 		var envelopesApi = new docusign.EnvelopesApi(dsApiClient);
 
 		app.helpers.removeEmptyAndNulls(envDef);
 
-		// // pretty printing (no base64 bytes) 
+		// // pretty printing (no base64 bytes)
 		// var mockEnv = JSON.parse(JSON.stringify(envDef));
 		// mockEnv.documents = _.map(mockEnv.documents,function(doc){
 		// 	if(doc.documentBase64){
@@ -326,7 +324,10 @@ router.post('/loan/sailboat', function(req, res, next) {
 		envelopesApi.createEnvelope(req.session.accountId, {envelopeDefinition: envDef}, function (error, envelopeSummary, response) {
 			if (error) {
 				console.error('Error: ' + response.text);
-				res.send('Error creating envelope, please try again');
+				if (response.text.indexOf ('This account does not have document visibility turned on') > 0)
+				  res.send('<h2>Please enable Document Visibility</h2><p>To complete this action and send the envelope, you must log in to your <a target="_blank" href="https://demo.docusign.net">Developer Account</a> account, open DocuSign Admin, select Sending Settings from the left nav, and enable Document Visibility for this account. For more information about enabling Document Visibility, check our our <a target="_blank" href="https://support.docusign.com/en/guides/ndse-user-guide-document-visibility">Admin Guide</a>.</p><h3><a href="/">Back to LoanCo...</a>');
+				else
+				  res.send('Error creating envelope, please try again');
 				return;
 			}
 
@@ -342,7 +343,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 					req.session.remainingSigners.push('remote-signer');
 				}
 
-				req.session.remainingSigners.push('remote-signer'); // last signer is remote (employee) 
+				req.session.remainingSigners.push('remote-signer'); // last signer is remote (employee)
 
 				if(body.inputSigningLocation == 'embedded'){
 					app.helpers.getRecipientUrl(req, envelopeSummary.envelopeId, signer, function(err, data){
@@ -371,4 +372,3 @@ router.post('/loan/sailboat', function(req, res, next) {
 });
 
 module.exports = router;
-

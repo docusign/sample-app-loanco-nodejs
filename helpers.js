@@ -54,6 +54,10 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
     returnUrl.returnUrl = `${app.config.auth.LocalReturnUrl}/pop/` + envelopeId;
     returnUrl.authenticationMethod = 'email';
 
+    console.log("\n\n\nREQ SESSION PRINTOUT:\n\n")
+    console.log(req.session.basePath);
+    console.log(req.session.base_uri);
+    console.log("\n\n\n")
     // recipient information must match embedded recipient info we provided
     returnUrl.userName = recipient.name || recipient.hostName;
     returnUrl.email = recipient.email || recipient.hostEmail;

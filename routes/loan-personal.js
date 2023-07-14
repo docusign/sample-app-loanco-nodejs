@@ -14,9 +14,9 @@ router.get('/loan/personal', function(req, res, next) {
     if (! tokenOK) {
 		req.session.loan = 'personal';
 		res.locals.session.loan = 'personal';
-		dsAuthCodeGrant.prototype.login(req, res, next)    
+		dsAuthCodeGrant.prototype.login(req, res, next)
 	}
-	else {	
+	else {
 		res.render('loan-personal', {
 			signing_location_options: app.helpers.signing_location_options,
 			authentication_options: app.helpers.authentication_options
@@ -26,7 +26,7 @@ router.get('/loan/personal', function(req, res, next) {
 
 
 router.post('/loan/personal', function(req, res, next) {
-		
+
 	console.log ('Starting processing of personal loan information');
 
 	var body = req.body;
@@ -170,8 +170,8 @@ router.post('/loan/personal', function(req, res, next) {
 		locked: 'false',
 		value: body.inputLoanAmount
 	}));
-	
-	// Payment payback period (months) 
+
+	// Payment payback period (months)
 	tabList.number.push(app.helpers.makeTab('Text', {
 		recipientId: '1',
 		name: 'PaymentDuration',
@@ -182,7 +182,7 @@ router.post('/loan/personal', function(req, res, next) {
 		locked: 'false',
 		value: body.inputLoanLength
 	}));
-	
+
 	// Monthly payments (calculated field)
 	tabList.formula.push(app.helpers.makeTab('FormulaTab', {
 		recipientId: '1',
@@ -200,7 +200,7 @@ router.post('/loan/personal', function(req, res, next) {
 		recipientId: '1',
 		anchorString: 'DocuSign API rocks',
 		anchorXOffset: '10',
-		anchorYOffset: '60',
+		anchorYOffset: '40',
 	}));
 
 
@@ -260,8 +260,7 @@ router.post('/loan/personal', function(req, res, next) {
 		});
 
 	});
-}); 
+});
 
 
 module.exports = router;
-
