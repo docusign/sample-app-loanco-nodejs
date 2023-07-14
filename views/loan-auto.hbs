@@ -41,7 +41,7 @@
 
         <p>
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
           </span>
         </p>
         <div class="collapse" id="collapseAdvanced">
@@ -57,7 +57,7 @@
             </select>
 
             <span class="help-block">
-              Embed the signing experience, or send an email (remote) 
+              Embed the signing experience, or send an email (remote)
             </span>
             <div class="help-block with-errors"></div>
           </div>
@@ -81,7 +81,7 @@
             <span class="help-block">
               Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
               <br />
-              * This can be enabled when using your own account 
+              * This can be enabled when using your own account
             </span>
           </div>
         </div>
@@ -121,7 +121,7 @@
 
           <p>
             <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvancedCosigner" aria-expanded="false" aria-controls="collapseAdvancedCosigner">
-              <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+              <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
             </span>
           </p>
           <div class="collapse" id="collapseAdvancedCosigner">
@@ -137,7 +137,7 @@
               </select>
 
               <span class="help-block">
-                Embed the signing experience, or send an email (remote) 
+                Embed the signing experience, or send an email (remote)
               </span>
               <div class="help-block with-errors"></div>
             </div>
@@ -161,7 +161,7 @@
               <span class="help-block">
                 Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
                 <br />
-                * This can be enabled when using your own account 
+                * This can be enabled when using your own account
               </span>
             </div>
           </div>
@@ -233,7 +233,7 @@
 
       <p class="text-right2">
         <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
-          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> See behind the scenes
+          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> See behind the scenes
         </span>
       </p>
       <div class="collapse" id="collapseHow">
@@ -254,7 +254,7 @@
 
 
         <h4>
-          Code Flow: 
+          Code Flow:
         </h4>
 
         <h5>
@@ -262,27 +262,27 @@
         </h5>
 
         <p>
-          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to create the signature request with the corresponding form information. Since we are using a Template in this case the <code>templateId</code> property is used to apply a given template to the envelope and the <code>templateRoles</code> node is used to assign recipient(s) to roles within the template. 
+          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to create the signature request with the corresponding form information. Since we are using a Template in this case the <code>templateId</code> property is used to apply a given template to the envelope and the <code>templateRoles</code> node is used to assign recipient(s) to roles within the template.
         </p>
-          
-        <p>                  
+
+        <p>
           To match a recipient to a role we use the <code>roleName</code> property, which must exactly match the role name saved in the template. We do this for both our Applicant and Cosigner. To set default tab values for each role we use the <code>tabs</code> node just like we did when in the first loan example, except here we omit any positioning information since that is saved within the template.
         </p>
 
-        <p>                  
+        <p>
           To identify and populate a given tab we use the <code>tabLabel</code> and <code>value</code> properties, respectively. And once again to use embedded signing we must set the <code>clientUserId</code> property for each recipient (or template role in this case).
         </p>
 
         <p>
           To create and send an envelope from a template send an http POST request to:
-        
+
 <pre>
-POST /v2/accounts/{accountId}/envelopes
+POST /v2.1/accounts/{accountId}/envelopes
 </pre>
 
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON" aria-expanded="false" aria-controls="collapseJSON">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON
           </span>
         </p>
         <div class="collapse" id="collapseJSON">
@@ -348,17 +348,17 @@ POST /v2/accounts/{accountId}/envelopes
         </p>
 
         <br />
-        
+
         <p>
           To create the recipient view of the envelope we send an http POST request to:
-        
+
 <pre>
-POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
+POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
 </pre>
         </p>
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
           </span>
         </p>
         <div class="collapse" id="collapseJSON2">
@@ -388,4 +388,3 @@ POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
   {{> footer}}
 
 </div>
-

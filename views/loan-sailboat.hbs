@@ -36,7 +36,7 @@
 
         <p>
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
           </span>
         </p>
         <div class="collapse" id="collapseAdvanced">
@@ -52,7 +52,7 @@
             </select>
 
             <span class="help-block">
-              Embed the signing experience, or send an email (remote) 
+              Embed the signing experience, or send an email (remote)
             </span>
             <div class="help-block with-errors"></div>
           </div>
@@ -76,7 +76,7 @@
             <span class="help-block">
               Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
               <br />
-              * This can be enabled when using your own account 
+              * This can be enabled when using your own account
             </span>
           </div>
         </div>
@@ -107,7 +107,7 @@
 
         <p>
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvancedAppraiser" aria-expanded="false" aria-controls="collapseAdvancedAppraiser">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
           </span>
         </p>
         <div class="collapse" id="collapseAdvancedAppraiser">
@@ -123,7 +123,7 @@
             </select>
 
             <span class="help-block">
-              Embed the signing experience, or send an email (remote) 
+              Embed the signing experience, or send an email (remote)
             </span>
             <div class="help-block with-errors"></div>
           </div>
@@ -147,7 +147,7 @@
             <span class="help-block">
               Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
               <br />
-              * This can be enabled when using your own account 
+              * This can be enabled when using your own account
             </span>
           </div>
         </div>
@@ -158,12 +158,16 @@
         <hr />
 
         <div class="row">
+          <div class="col-sm-12 text-left">
+            <p><b>Note:</b> You must enable <a target="_blank" href="https://support.docusign.com/en/guides/ndse-user-guide-document-visibility">Document Visibility</a> for this account.</p>
+          </div>
           <div class="col-sm-12 text-center">
             <button type="submit" class="btn btn-primary has-spinner">
               Start Sailboat Loan Application
               <span class="spinner"><i class="fa fa-spinner fa-spin icon-spin"></i></span>
             </button>
           </div>
+
         </div>
 
 
@@ -182,7 +186,7 @@
 
       <p class="text-right2">
         <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
-          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> See behind the scenes
+          <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> See behind the scenes
         </span>
       </p>
       <div class="collapse" id="collapseHow">
@@ -205,7 +209,7 @@
 
 
         <h4>
-          Code Flow: 
+          Code Flow:
         </h4>
 
         <h5>
@@ -214,14 +218,14 @@
 
         <p>
           When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">Envelopes: create</a> API to send the signature request with the corresponding form information. We add <code>Documents</code> to sign and use a <code>signerAttachmentTab</code> to allow an optional image file to be added to the envelope. You can optionally add additional factors of authentication, such as <code>AccessCode</code>, Phone, or ID Check, and you can sign using embedded signing or remote signing.
-        </p> 
+        </p>
 
         <p>
-          This workflow uses the <code>brandId</code> property to apply a custom branding profile to the signing experience. It also contains multiple documents and demonstrates the Document Visibility feature. In this case Document Visibility is used to prevent the Applicant from seeing the Appraiser document until the envelope has completed. 
-        </p>          
-          
-        <p>          
-          The rules governing Document Visibility are as follows: 
+          This workflow uses the <code>brandId</code> property to apply a custom branding profile to the signing experience. It also contains multiple documents and demonstrates the Document Visibility feature. In this case Document Visibility is used to prevent the Applicant from seeing the Appraiser document until the envelope has completed.
+        </p>
+
+        <p>
+          The rules governing Document Visibility are as follows:
           <ul>
             <li>
               You can only show documents to a recipient if they have a tab on the document or nobody has a tab on the document
@@ -231,10 +235,10 @@
             </li>
           </ul>
 
-          In order to have our Applicant document visible to our Appraiser, we add a blank/invisible <code>Text</code> Tab with the following values: 
+          In order to have our Applicant document visible to our Appraiser, we add a blank/invisible <code>Text</code> Tab with the following values:
 
         </p>
-        
+
         <p>
 <pre>
 
@@ -251,7 +255,7 @@
         </p>
 
 <p>
-  Of the other Tabs, of special note is the "optional" attribute added to the SignerAttachment Tab: 
+  Of the other Tabs, of special note is the "optional" attribute added to the SignerAttachment Tab:
 </p>
 <pre>
   "signerAttachmentTabs": [
@@ -266,25 +270,25 @@
     }
 </pre>
         <p>
-          We are using <a href="https://developers.docusign.com/esign-rest-api/guides/features/tabs#tab-locations-and-positioning" target="_blank">Auto-Place</a> to position our Tabs (notice the <code>anchorString</code>, <code>anchorXOffset</code>, and <code>anchorYOffset</code> strings. 
+          We are using <a href="https://developers.docusign.com/esign-rest-api/guides/features/tabs#tab-locations-and-positioning" target="_blank">Auto-Place</a> to position our Tabs (notice the <code>anchorString</code>, <code>anchorXOffset</code>, and <code>anchorYOffset</code> strings.
 
           <br />
 
-          <strong>Note: </strong> if you receive an error message when running this yourself, please view the <a href="https://github.com/docusign/sample-app-loanco-nodejs/blob/master/README.md" target="_blank">README</a> for settings your account may be missing. 
-          
+          <strong>Note: </strong> if you receive an error message when running this yourself, please view the <a href="https://github.com/docusign/sample-app-loanco-nodejs/blob/master/README.md" target="_blank">README</a> for settings your account may be missing.
+
         </p>
 
         <p>
           To create and send the envelope we send an http POST request to:
 
 <pre>
-POST /v2/accounts/{accountId}/envelopes
+POST /v2.1/accounts/{accountId}/envelopes
 </pre>
         </p>
 
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON" aria-expanded="false" aria-controls="collapseJSON">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON
           </span>
         </p>
         <div class="collapse" id="collapseJSON">
@@ -439,17 +443,17 @@ POST /v2/accounts/{accountId}/envelopes
         <p>
           Once the envelope is sent we save the envelope ID and Recipient information to our session then redirect to the <tt>/sign/embedded</tt> page. There we retrieve the envelope ID and recipient info from our session and create the recipient view by generating the URL and displaying in a full-width and full-height iframe.
         </p>
-        
+
         <p>
           To create the recipient view of the envelope we send an http POST request to:
-        
+
 <pre>
-POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
+POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
 </pre>
         </p>
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
           </span>
         </p>
         <div class="collapse" id="collapseJSON2">

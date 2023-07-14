@@ -51,7 +51,7 @@
               <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="" data-error="Please enter your city of residence" required value="Anaheim">
               <div class="help-block with-errors"></div>
             </div>
-            
+
           </div>
           <div class="col-sm-3">
 
@@ -112,7 +112,7 @@
               </select>
               <div class="help-block with-errors"></div>
             </div>
-            
+
           </div>
           <div class="col-sm-3">
 
@@ -121,7 +121,7 @@
               <input type="text" class="form-control" id="inputZip" name="inputZip" placeholder="" required value="90210">
               <div class="help-block with-errors"></div>
             </div>
-            
+
           </div>
         </div>
 
@@ -132,7 +132,7 @@
         </div>
         <p>
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Advanced
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
           </span>
         </p>
         <div class="collapse" id="collapseAdvanced">
@@ -148,7 +148,7 @@
             </select>
 
             <span class="help-block">
-              Embed the signing experience, or send an email (remote) 
+              Embed the signing experience, or send an email (remote)
             </span>
             <div class="help-block with-errors"></div>
           </div>
@@ -172,11 +172,29 @@
             <span class="help-block">
               Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
               <br />
-              * This can be enabled when using your own account 
+              * This can be enabled when using your own account
             </span>
           </div>
         </div>
 
+
+        <h4>
+          Financials
+        </h4>
+        <div class="form-group">
+          <label for="inputLoanAmount">Desired Loan Amount</label>
+          <div>
+            <input type="number" class="form-control" id="inputLoanAmount" name="inputLoanAmount" placeholder="" required value="35000" style="display:inline-block;width:80px;text-align:center;" /> dollars
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <label for="inputLoanLength">Repayment Terms</label>
+          <div>
+            <input type="number" class="form-control" id="inputLoanLength" name="inputLoanLength" placeholder="" required value="35" style="display:inline-block;width:80px;text-align:center;" /> months
+          </div>
+          <div class="help-block with-errors"></div>
+        </div>
 
         <hr />
 
@@ -227,7 +245,7 @@
 
 
         <h4>
-          Code Flow: 
+          Code Flow:
         </h4>
 
         <h5>
@@ -236,9 +254,9 @@
 
         <p>
           When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to send the signature request with the corresponding form information. The envelope we construct contains a <code>document</code>, a recipient of type <code>signer</code>, and <code>tabs</code> which contain the form fields information. If embedded signing is selected we must also set the <code>clientUserId</code> property on the recipient.
-        </p> 
-        
-        <p>        
+        </p>
+
+        <p>
           Multi-factor authentication can be added using an <code>accessCode</code> or additional Authentication (Phone or ID Check). Note that this example uses the <a href="https://developers.docusign.com/esign-rest-api/guides/features/tabs#tab-locations-and-positioning" target="_blank">Auto-Place</a> feature for placing tabs on the document.
         </p>
 
@@ -246,13 +264,13 @@
           To create and send an envelope send an http POST request to:
 
 <pre>
-POST /v2/accounts/{accountId}/envelopes
+POST /v2.1/accounts/{accountId}/envelopes
 </pre>
         </p>
-        
+
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON" aria-expanded="false" aria-controls="collapseJSON">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON
           </span>
         </p>
         <div class="collapse" id="collapseJSON">
@@ -415,17 +433,17 @@ POST /v2/accounts/{accountId}/envelopes
         <p>
           Once the envelope is sent we save the envelope ID and Recipient information to our session then redirect to the <tt>/sign/embedded</tt> page. There we retrieve the envelope ID and recipient info from our session and create the recipient view by generating the URL and displaying in a full-width and full-height iframe.
         </p>
-        
+
         <p>
           To create the recipient view of the envelope we send an http POST request to:
-        
+
 <pre>
-POST /v2/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
+POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
 </pre>
         </p>
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="  true"></i> Click to view example request JSON
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON
           </span>
         </p>
         <div class="collapse" id="collapseJSON2">

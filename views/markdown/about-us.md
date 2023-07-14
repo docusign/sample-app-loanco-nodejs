@@ -1,7 +1,7 @@
 
  <br />
- 
-### LoanCo Sample App 
+
+### LoanCo Sample App
 
 > A sample loan application that demonstrates some common DocuSign API workflows including requesting signatures, embedded signing, forms and data, and real-time status.
 
@@ -38,17 +38,17 @@ __Source on GitHub: <a target="_blank" href="https://github.com/DocuSign/sample-
 <a target="_blank" href="https://developers.docusign.com">https://developers.docusign.com</a>
 
 <h5>DocuSign eSignature API Code Examples</h5>
-<a target="_blank" href="https://developers.docusign.com/esign-rest-api/code-examples">https://developers.docusign.com/esign-rest-api/code-examples</a>
+<a target="_blank" href="https://developers.docusign.com/docs/esign-rest-api/how-to/">hhttps://developers.docusign.com/docs/esign-rest-api/how-to/</a>
 
 <h5>DocuSign eSignature API Documentation</h5>
-<a target="_blank" href="https://developers.docusign.com/esign-rest-api/reference">https://developers.docusign.com/esign-rest-api/reference</a> 
+<a target="_blank" href="https://developers.docusign.com/docs/esign-rest-api/reference/">https://developers.docusign.com/docs/esign-rest-api/reference/</a>
 
-<h5>Developer Community</h5> 
-<a target="_blank" href="http://stackoverflow.com/questions/tagged/docusignapi" rel="nofollow">http://stackoverflow.com/questions/tagged/docusignapi</a>
+<h5>Developer Community</h5>
+<a target="_blank" href="https://stackoverflow.com/questions/tagged/docusignapi" rel="nofollow">https://stackoverflow.com/questions/tagged/docusignapi</a>
 
 </div></div>
 
-### About DocuSign 
+### About DocuSign
 
 * More than __600 million users__ in __188 countries__
 * More than 300,000 companies
