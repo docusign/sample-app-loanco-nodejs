@@ -32,7 +32,7 @@ router.get('/envelopes/:envelopeId/download/:documentId', function(req, res, nex
 			return res.status(500).send(err);
 		}
 		if(!envelope){
-			return res.status(404).send('Missing envelope');	
+			return res.status(404).send('Missing envelope');
 		}
 
 		// set the required authentication information
@@ -62,8 +62,6 @@ router.get('/envelopes/:envelopeId/download/:documentId', function(req, res, nex
 				res.end(buffer);
 			}
 		});
-		
-
 	});
 });
 
@@ -81,4 +79,3 @@ router.get('/envelopes', function(req, res, next){
 });
 
 module.exports = router;
-
