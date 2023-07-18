@@ -202,7 +202,7 @@ if(useHttps){
         key: privateKey,
         cert: certificate
       });
-    
+
       httpsServer = require('https').Server(credentials, app);
   }catch(err){
     console.error('HTTPS server failed to start. Missing key or crt');

@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/pop/:popid', function(req, res, next) {
 	// used for breaking out of the iframe after embedded signing
-	res.render('pop', { 
+	res.render('pop', {
 		layout: false,
 		pop: req.params.popid
 	});
@@ -101,9 +101,9 @@ router.get('/sign/return', function(req, res){
 	}
 
 	// Get the next embedded signer
-	if(req.query.event == 'signing_complete' 
-		&& req.session 
-		&& req.session.remainingSigners 
+	if(req.query.event == 'signing_complete'
+		&& req.session
+		&& req.session.remainingSigners
 		&& req.session.remainingSigners.length){
 
 		var signer = req.session.remainingSigners[0];
@@ -113,13 +113,13 @@ router.get('/sign/return', function(req, res){
 			// remove this signer from the array
 			req.session.remainingSigners.shift();
 
-	        app.helpers.getRecipientUrl(req.session.envelopeId, signer, function(err, data){
+	        app.helpers.getRecipientUrl(req, req.session.envelopeId, signer, function(err, data){
 	        	if(err){
 			        res.send('Error with getRecipientUrl, please try again');
 	        		return console.error(err);
 	        	}
 
-	    		req.session.signingUrl = data.getUrl();
+	    		req.session.signingUrl = data.url;
 	    		res.redirect('/sign/embedded');
 
 	        });
@@ -144,4 +144,3 @@ router.get('/sign/return', function(req, res){
 });
 
 module.exports = router;
-
