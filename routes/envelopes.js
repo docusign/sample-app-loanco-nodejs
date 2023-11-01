@@ -11,7 +11,7 @@ var docusign = require('docusign-esign'),
 router.get('/envelopes/:envelopeId/filelist/', function(req, res, next){
 	app.models.Envelope.findOne({
 		envelopeId: req.params.envelopeId,
-		sessionId: req.session.id
+		userId: req.user?.sub
 	})
 	.sort({_id: -1})
 	.exec(function(err, envelope){
@@ -25,7 +25,7 @@ router.get('/envelopes/:envelopeId/filelist/', function(req, res, next){
 router.get('/envelopes/:envelopeId/download/:documentId', function(req, res, next){
 	app.models.Envelope.findOne({
 		envelopeId: req.params.envelopeId,
-		sessionId: req.session.id
+		userId: req.user?.sub
 	})
 	.exec(function(err, envelope){
 		if(err){
@@ -68,7 +68,7 @@ router.get('/envelopes/:envelopeId/download/:documentId', function(req, res, nex
 
 router.get('/envelopes', function(req, res, next){
 	app.models.Envelope.find({
-		sessionId: req.session.id
+		userId: req.user?.sub
 	})
 	.exec(function(err, envelopes){
 		console.log(JSON.stringify(envelopes,null,2));
