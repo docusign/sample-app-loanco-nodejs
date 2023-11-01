@@ -19,7 +19,9 @@ router.get('/loan/personal', function(req, res, next) {
 	else {
 		res.render('loan-personal', {
 			signing_location_options: app.helpers.signing_location_options,
-			authentication_options: app.helpers.authentication_options
+			authentication_options: app.helpers.authentication_options,
+			signing_url: res.locals.session.signingUrl,
+			client_id: res.locals.session.clientId
 		});
 	}
 });
@@ -247,12 +249,12 @@ router.post('/loan/personal', function(req, res, next) {
 						return console.error(err);
 					}
 
-					req.session.envelopeId = envelopeSummary.envelopeId;
+					res.locals.session.signingUrl = data.url;
+					res.locals.session.clientId = process.env.DOCUSIGN_IK;
 					req.session.signingUrl = data.url;
+					req.session.clientId = process.env.DOCUSIGN_IK;
 
-					res.redirect('/sign/embedded');
-
-
+					res.redirect('/loan/personal');
 				});
 			} else {
 				res.redirect('/sign/remote');

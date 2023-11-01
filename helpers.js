@@ -50,17 +50,19 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
 
   // set the url where you want the recipient to go once they are done signing
     // - this can be used by your app to watch the URL and detect when signing has completed (or was canceled)
-    var returnUrl = new docusign.RecipientViewRequest();
-    returnUrl.returnUrl = `${app.config.auth.LocalReturnUrl}/pop/` + envelopeId;
-    returnUrl.authenticationMethod = 'email';
+    var recipientViewRequest = new docusign.RecipientViewRequest();
+    recipientViewRequest.returnUrl = `${app.config.auth.LocalReturnUrl}/pop/` + envelopeId;
+    recipientViewRequest.authenticationMethod = 'email';
 
     // recipient information must match embedded recipient info we provided
-    returnUrl.userName = recipient.name || recipient.hostName;
-    returnUrl.email = recipient.email || recipient.hostEmail;
-    returnUrl.recipientId = recipient.recipientId;
-    returnUrl.clientUserId = recipient.clientUserId;
+    recipientViewRequest.userName = recipient.name || recipient.hostName;
+    recipientViewRequest.email = recipient.email || recipient.hostEmail;
+    recipientViewRequest.recipientId = recipient.recipientId;
+    recipientViewRequest.clientUserId = recipient.clientUserId;
+    recipientViewRequest.frameAncestors = ['http://localhost:3801', 'https://apps-d.docusign.com'];
+    recipientViewRequest.messageOrigins = ['https://apps-d.docusign.com'];
 
-    app.helpers.removeEmptyAndNulls(returnUrl);
+    app.helpers.removeEmptyAndNulls(recipientViewRequest);
 
     // set the required authentication information
     let dsApiClient = new docusign.ApiClient();
@@ -73,7 +75,7 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
     // console.log(JSON.stringify(returnUrl,null,2));
 
     // call the CreateRecipientView API
-    envelopesApi.createRecipientView(req.session.accountId, envelopeId, {recipientViewRequest: returnUrl}, function (error, recipientView, response) {
+    envelopesApi.createRecipientView(req.session.accountId, envelopeId, {recipientViewRequest: recipientViewRequest}, function (error, recipientView, response) {
       if (error) {
         console.log('createRecipientView Error');
         // console.error(error.error);
