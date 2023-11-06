@@ -112,8 +112,6 @@ DSAuthCodeGrant.prototype.oauth_callback2 = function _oauth_callback2(req, res, 
 		res.render(loan, {
 			signing_location_options: app.helpers.signing_location_options,
 			authentication_options: app.helpers.authentication_options,
-      signing_url: req.session.signingUrl || res.locals.session.signingUrl,
-      client_id: req.session.clientId || res.locals.session.clientId
 		});
   }
 

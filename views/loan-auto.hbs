@@ -14,121 +14,42 @@
 
       <hr />
 
-      <form id="mainForm1" data-toggle="validator" method="POST" action="/loan/auto">
-
-        <div class="form-group">
-          <label for="inputFirstName">First Name</label>
-          <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="Edgar" required>
-          <div class="help-block with-errors"></div>
-        </div>
-        <div class="form-group">
-          <label for="inputLastName">Last Name</label>
-          <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Holmes" required>
-          <div class="help-block with-errors"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="inputEmail">Email Address</label>
-          <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="" required value="{{default_email}}">
-          <div class="help-block with-errors"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="inputPhone">Phone Number</label>
-          <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="" value="" />
-          <div class="help-block with-errors"></div>
-        </div>
-
-        <p>
-          <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
-          </span>
-        </p>
-        <div class="collapse" id="collapseAdvanced">
+      <div class="docusign-agreement" id="agreement">
+        <form id="mainForm1" data-toggle="validator" method="POST" action="/loan/auto">
 
           <div class="form-group">
-            <label for="input">Signing Location</label>
-            <select class="form-control" name="inputSigningLocation">
-              {{#each signing_location_options}}
-                <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
-                  {{this}}
-                </option>
-              {{/each}}
-            </select>
-
-            <span class="help-block">
-              Embed the signing experience, or send an email (remote)
-            </span>
+            <label for="inputFirstName">First Name</label>
+            <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="Edgar" required>
             <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
-            <label for="access_code">Access Code</label>
-            <input type="text" class="form-control" id="access_code" name="inputAccessCode" placeholder="" value="{{config.access_code}}" />
-            <span class="help-block">
-              Set an Access Code for this customer to enter before signing documents
-            </span>
+            <label for="inputLastName">Last Name</label>
+            <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Holmes" required>
             <div class="help-block with-errors"></div>
           </div>
-          <div class="form-group">
-            <label for="authentication">Additional Authentication</label>
-            <select class="form-control" name="inputAuthentication" disabled>
-              {{#each authentication_options}}
-                <option value="{{this}}" {{#ifCond this "==" ../config.authentication}}selected{{/ifCond}}>
-                  {{this}}
-                </option>
-              {{/each}}
-            </select>
-            <span class="help-block">
-              Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
-              <br />
-              * This can be enabled when using your own account
-            </span>
-          </div>
-        </div>
 
+          <div class="form-group">
+            <label for="inputEmail">Email Address</label>
+            <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="" required value="{{default_email}}">
+            <div class="help-block with-errors"></div>
+          </div>
 
-        <hr />
-
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" id="inputCosignerCheckbox" name="inputCosignerCheckbox" /> Include Cosigner
-          </label>
-        </div>
-        <div class="cosigner" style="display:none;">
-          <h3>
-            CoSigner Information
-          </h3>
           <div class="form-group">
-            <label for="inputCosignerFirstName">First Name</label>
-            <input type="text" class="form-control" id="inputCosignerFirstName" name="inputCosignerFirstName" placeholder="" required value="James" />
-            <div class="help-block with-errors"></div>
-          </div>
-          <div class="form-group">
-            <label for="inputCosignerLastName">Last Name</label>
-            <input type="text" class="form-control" id="inputCosignerLastName" name="inputCosignerLastName" placeholder="" required value="Wilson" />
-            <div class="help-block with-errors"></div>
-          </div>
-          <div class="form-group">
-            <label for="inputCosignerEmail">Email Address</label>
-            <input type="email" class="form-control" id="inputCosignerEmail" name="inputCosignerEmail" placeholder="" value="{{default_email}}" />
-            <div class="help-block with-errors"></div>
-          </div>
-          <div class="form-group">
-            <label for="inputCosignerPhone">Phone Number</label>
-            <input type="tel" class="form-control" id="inputCosignerPhone" name="inputCosignerPhone" placeholder="" value="" />
+            <label for="inputPhone">Phone Number</label>
+            <input type="tel" class="form-control" id="inputPhone" name="inputPhone" placeholder="" value="" />
             <div class="help-block with-errors"></div>
           </div>
 
           <p>
-            <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvancedCosigner" aria-expanded="false" aria-controls="collapseAdvancedCosigner">
+            <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvanced" aria-expanded="false" aria-controls="collapseAdvanced">
               <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
             </span>
           </p>
-          <div class="collapse" id="collapseAdvancedCosigner">
+          <div class="collapse" id="collapseAdvanced">
 
             <div class="form-group">
               <label for="input">Signing Location</label>
-              <select class="form-control" name="inputSigningLocationCosigner">
+              <select class="form-control" name="inputSigningLocation">
                 {{#each signing_location_options}}
                   <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
                     {{this}}
@@ -142,16 +63,16 @@
               <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
-              <label for="access_codeCosigner">Access Code</label>
-              <input type="text" class="form-control" id="access_codeCosigner" name="inputAccessCodeCosigner" placeholder="" value="{{config.access_code}}" />
+              <label for="access_code">Access Code</label>
+              <input type="text" class="form-control" id="access_code" name="inputAccessCode" placeholder="" value="{{config.access_code}}" />
               <span class="help-block">
                 Set an Access Code for this customer to enter before signing documents
               </span>
               <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
-              <label for="authenticationCosigner">Additional Authentication</label>
-              <select class="form-control" name="inputAuthenticationCosigner" disabled>
+              <label for="authentication">Additional Authentication</label>
+              <select class="form-control" name="inputAuthentication" disabled>
                 {{#each authentication_options}}
                   <option value="{{this}}" {{#ifCond this "==" ../config.authentication}}selected{{/ifCond}}>
                     {{this}}
@@ -167,44 +88,124 @@
           </div>
 
 
+          <hr />
 
-
-        </div>
-
-        <hr />
-
-        <h4>
-          Financials
-        </h4>
-        <div class="form-group">
-          <label for="inputLoanAmount">Desired Loan Amount</label>
-          <div>
-            <input type="number" class="form-control" id="inputLoanAmount" name="inputLoanAmount" placeholder="" required value="36000" style="display:inline-block;width:80px;text-align:center;" /> dollars
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="inputCosignerCheckbox" name="inputCosignerCheckbox" /> Include Cosigner
+            </label>
           </div>
-          <div class="help-block with-errors"></div>
-        </div>
-        <div class="form-group">
-          <label for="inputLoanLength">Repayment Terms</label>
-          <div>
-            <input type="number" class="form-control" id="inputLoanLength" name="inputLoanLength" placeholder="" required value="36" style="display:inline-block;width:80px;text-align:center;" /> months
+          <div class="cosigner" style="display:none;">
+            <h3>
+              CoSigner Information
+            </h3>
+            <div class="form-group">
+              <label for="inputCosignerFirstName">First Name</label>
+              <input type="text" class="form-control" id="inputCosignerFirstName" name="inputCosignerFirstName" placeholder="" required value="James" />
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label for="inputCosignerLastName">Last Name</label>
+              <input type="text" class="form-control" id="inputCosignerLastName" name="inputCosignerLastName" placeholder="" required value="Wilson" />
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label for="inputCosignerEmail">Email Address</label>
+              <input type="email" class="form-control" id="inputCosignerEmail" name="inputCosignerEmail" placeholder="" value="{{default_email}}" />
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label for="inputCosignerPhone">Phone Number</label>
+              <input type="tel" class="form-control" id="inputCosignerPhone" name="inputCosignerPhone" placeholder="" value="" />
+              <div class="help-block with-errors"></div>
+            </div>
+
+            <p>
+              <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseAdvancedCosigner" aria-expanded="false" aria-controls="collapseAdvancedCosigner">
+                <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Advanced
+              </span>
+            </p>
+            <div class="collapse" id="collapseAdvancedCosigner">
+
+              <div class="form-group">
+                <label for="input">Signing Location</label>
+                <select class="form-control" name="inputSigningLocationCosigner">
+                  {{#each signing_location_options}}
+                    <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+
+                <span class="help-block">
+                  Embed the signing experience, or send an email (remote)
+                </span>
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="access_codeCosigner">Access Code</label>
+                <input type="text" class="form-control" id="access_codeCosigner" name="inputAccessCodeCosigner" placeholder="" value="{{config.access_code}}" />
+                <span class="help-block">
+                  Set an Access Code for this customer to enter before signing documents
+                </span>
+                <div class="help-block with-errors"></div>
+              </div>
+              <div class="form-group">
+                <label for="authenticationCosigner">Additional Authentication</label>
+                <select class="form-control" name="inputAuthenticationCosigner" disabled>
+                  {{#each authentication_options}}
+                    <option value="{{this}}" {{#ifCond this "==" ../config.authentication}}selected{{/ifCond}}>
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+                <span class="help-block">
+                  Enable Phone Authentication to receive a verification phone call before signing documents (<a href="https://support.docusign.com/guides/ndse-user-guide-how-phone-authentication-works" target="_blank">Learn More</a>)
+                  <br />
+                  * This can be enabled when using your own account
+                </span>
+              </div>
+            </div>
+
+
+
+
           </div>
-          <div class="help-block with-errors"></div>
-        </div>
 
-        <hr />
+          <hr />
 
-        <div class="row">
-          <div class="col-sm-12 text-center">
-            <button type="submit" class="btn btn-primary has-spinner">
-              Start Auto Loan Application
-              <span class="spinner"><i class="fa fa-spinner fa-spin icon-spin"></i></span>
-            </button>
+          <h4>
+            Financials
+          </h4>
+          <div class="form-group">
+            <label for="inputLoanAmount">Desired Loan Amount</label>
+            <div>
+              <input type="number" class="form-control" id="inputLoanAmount" name="inputLoanAmount" placeholder="" required value="36000" style="display:inline-block;width:80px;text-align:center;" /> dollars
+            </div>
+            <div class="help-block with-errors"></div>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="inputLoanLength">Repayment Terms</label>
+            <div>
+              <input type="number" class="form-control" id="inputLoanLength" name="inputLoanLength" placeholder="" required value="36" style="display:inline-block;width:80px;text-align:center;" /> months
+            </div>
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <button type="submit" class="btn btn-primary has-spinner">
+                Start Auto Loan Application
+                <span class="spinner"><i class="fa fa-spinner fa-spin icon-spin"></i></span>
+              </button>
+            </div>
+          </div>
 
 
-      </form>
-
+        </form>
+      </div>
 
       <script type="text/javascript">
         $(document).ready(function(){

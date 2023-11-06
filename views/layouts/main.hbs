@@ -1,50 +1,37 @@
-<html lang="en">
+<html lang='en'>
   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta charset='utf-8'>
+      <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+      <meta name='viewport' content='width=device-width, initial-scale=1'>
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <link rel="icon" href="/favicon.ico">
+      <meta name='description' content=''>
+      <meta name='author' content=''>
+      <link rel='icon' href='/favicon.ico'>
 
       <title>LoanCo Sample App</title>
 
       <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
 
       <!-- Optional theme -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css' integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp' crossorigin='anonymous'>
 
-      <link href="/stylesheets/modern-business.css" rel="stylesheet">
-      <link href="/stylesheets/style.css" rel="stylesheet">
+      <link href='/stylesheets/modern-business.css' rel='stylesheet'>
+      <link href='/stylesheets/style.css' rel='stylesheet'>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 
       <!-- FontAwesome -->
-      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+      <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1' crossorigin='anonymous'>
 
 
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
       <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <script src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'></script>
+        <script src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js'></script>
       <![endif]-->
 
       <!-- Google Tag Manager -->
-      <script>(function(w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          'gtm.start':
-            new Date().getTime(), event: 'gtm.js'
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', '{{googletag}}');</script>
       <!-- End Google Tag Manager -->
 
   </head>
@@ -54,10 +41,53 @@
     {{{body}}}
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
 
-    <script type="text/javascript" src="/bower_components/bootstrap-validator/dist/validator.js"></script>
-    <script type="text/javascript" src="/javascripts/app.js"></script>
-  
+    <script type='text/javascript' src='/bower_components/bootstrap-validator/dist/validator.js'></script>
+    <script type='text/javascript' src='/javascripts/app.js'></script>
+    <script src='https://js.docusign.com/bundle.js'></script>
+    <script>
+        window.DocuSign.loadDocuSign('{{client_id}}')
+            .then((docusign) => {
+                var url = '{{signing_url}}'.replace('&#x3D;', '=');
+                const signing = docusign.signing({
+                    url: url,
+                    displayFormat: 'focused',
+                    style: {
+                        /** High-level variables that mirror our existing branding APIs. Reusing the branding name here for familiarity. */
+                        branding: {
+                            primaryButton: {
+                                /** Background color of primary button */
+                                backgroundColor: '#333',
+                                /** Text color of primary button */
+                                color: '#fff',
+                            }
+                        },
+
+                        /** High-level components we allow specific overrides for */
+                        signingNavigationButton: {
+                            finishText: 'You have finished the document! Hooray!',
+                            position: 'bottom-center'
+                        }
+                    }
+                });
+
+                signing.on('ready', (event) => {
+                    console.log('UI is rendered');
+                });
+
+                signing.on('sessionEnd', (event) => {
+                    /** The event here denotes what caused the sessionEnd to trigger, such as signing_complete, ttl_expired etc../ **/
+                    console.log('sessionend', event);
+                    window.location.href = "/sign/return?event=signing_complete";
+
+                });
+
+                signing.mount('#agreement');
+            })
+            .catch((ex) => {
+                // Any configuration or API limits will be caught here
+            });
+    </script>
   </body>
 </html>

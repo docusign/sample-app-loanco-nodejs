@@ -11,15 +11,19 @@ var docusign = require('docusign-esign'),
 
 router.get('/loan/auto', function(req, res, next) {
     let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
-    if (! tokenOK) {
+	var isRedirected = res.locals.session.isRedirected;
+	res.locals.session.isRedirected = false;
+
+    if (!isRedirected && !tokenOK) {
 		req.session.loan = 'auto';
 		res.locals.session.loan = 'auto';
 		dsAuthCodeGrant.prototype.login(req, res, next)    
-	}
-	else {	
+	} else {	
 		res.render('loan-auto', {
 			signing_location_options: app.helpers.signing_location_options,
-			authentication_options: app.helpers.authentication_options
+			authentication_options: app.helpers.authentication_options,
+			signing_url: res.locals.session.signingUrl,
+			client_id: res.locals.session.clientId,
 		});
 	}
 });
@@ -201,12 +205,11 @@ router.post('/loan/auto', function(req, res, next) {
 							return console.error(err);
 						}
 	
-						req.session.envelopeId = envelopeSummary.envelopeId;
-						req.session.signingUrl = data.url;
+						res.locals.session.signingUrl = data.url;
+						res.locals.session.isRedirected = true;
+						res.locals.session.clientId = process.env.DOCUSIGN_IK;
 	
-						res.redirect('/sign/embedded');
-	
-	
+						res.redirect('/loan/auto');
 					});
 				} else {
 					res.redirect('/sign/remote');

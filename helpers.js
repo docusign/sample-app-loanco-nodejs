@@ -51,17 +51,17 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
   // set the url where you want the recipient to go once they are done signing
     // - this can be used by your app to watch the URL and detect when signing has completed (or was canceled)
     var recipientViewRequest = new docusign.RecipientViewRequest();
-    recipientViewRequest.returnUrl = `${app.config.auth.LocalReturnUrl}/pop/` + envelopeId;
-    recipientViewRequest.authenticationMethod = 'email';
+    recipientViewRequest.returnUrl = `${app.config.auth.LocalReturnUrl}`;
+    recipientViewRequest.authenticationMethod = 'none';
 
     // recipient information must match embedded recipient info we provided
     recipientViewRequest.userName = recipient.name || recipient.hostName;
     recipientViewRequest.email = recipient.email || recipient.hostEmail;
-    recipientViewRequest.recipientId = recipient.recipientId;
     recipientViewRequest.clientUserId = recipient.clientUserId;
-    recipientViewRequest.frameAncestors = ['http://localhost:3801', 'https://apps-d.docusign.com'];
+    recipientViewRequest.pingFrequency = "60";
+    recipientViewRequest.pingUrl = app.config.auth.LocalReturnUrl;
+    recipientViewRequest.frameAncestors = [app.config.auth.LocalReturnUrl, 'https://apps-d.docusign.com'];
     recipientViewRequest.messageOrigins = ['https://apps-d.docusign.com'];
-
     app.helpers.removeEmptyAndNulls(recipientViewRequest);
 
     // set the required authentication information
