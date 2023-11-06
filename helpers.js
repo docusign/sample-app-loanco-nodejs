@@ -52,7 +52,7 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
     // - this can be used by your app to watch the URL and detect when signing has completed (or was canceled)
     var recipientViewRequest = new docusign.RecipientViewRequest();
     recipientViewRequest.returnUrl = `${app.config.auth.LocalReturnUrl}`;
-    recipientViewRequest.authenticationMethod = 'none';
+    recipientViewRequest.authenticationMethod = 'email';
 
     // recipient information must match embedded recipient info we provided
     recipientViewRequest.userName = recipient.name || recipient.hostName;
