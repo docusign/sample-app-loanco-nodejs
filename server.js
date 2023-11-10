@@ -33,6 +33,9 @@ app.engine('hbs', exphbs.engine({
     toJSON : function(object) {
       return JSON.stringify(object);
     },
+    splitString : function(string){
+      return string.replace(/ .*/,'');
+    },
     ifCond : function(obj1, sign, obj2, options) {
       switch(sign){
 

@@ -10,7 +10,7 @@ var dsAuthCodeGrant = require('./DSAuthCodeGrant');
 var helpers = {};
 
 
-helpers.signing_location_options = ['embedded', 'remote'];
+helpers.signing_location_options = ['embedded (focused view)', 'remote'];
 helpers.authentication_options = ['none','phone','idcheck'];
 
 helpers.makeTab = function makeTab(type, data) {
