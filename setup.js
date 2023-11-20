@@ -73,7 +73,7 @@ setup.InsertTemplate = function(req, templateObj){
     // set the required authentication information
     let dsApiClient = new docusign.ApiClient();
     dsApiClient.setBasePath(req.session.basePath);
-    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
+    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
 
     var templatesApi = new docusign.TemplatesApi(dsApiClient);
     templatesApi.createTemplate(req.session.accountId, {envelopeTemplate:template}, function (err, templateList, response) {

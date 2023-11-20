@@ -190,6 +190,7 @@ router.post('/loan/auto', function(req, res, next) {
 							name: tRoleCosigner.name,
 							email: tRoleCosigner.email
 						}
+						res.locals.session.redirectLink = '/loan/auto';
 						req.session.remainingSigners.push(tCoSignerRecipient);
 					} else {
 						req.session.remainingSigners.push('remote-signer');
@@ -206,6 +207,7 @@ router.post('/loan/auto', function(req, res, next) {
 						}
 	
 						res.locals.session.signingUrl = data.url;
+						res.locals.session.envelopeId = envelopeSummary.envelopeId;
 						res.locals.session.isRedirected = true;
 						res.locals.session.clientId = process.env.DOCUSIGN_IK;
 	

@@ -30,6 +30,7 @@ router.get('/loan/sailboat', function(req, res, next) {
     });
   }
 });
+
 router.post('/loan/sailboat', function(req, res, next) {
 
 	var body = req.body;
@@ -359,9 +360,11 @@ router.post('/loan/sailboat', function(req, res, next) {
 
 						res.locals.session.signingUrl = data.url;
 						res.locals.session.isRedirected = true;
+						res.locals.session.envelopeId = envelopeSummary.envelopeId;
 						res.locals.session.clientId = process.env.DOCUSIGN_IK;
+						res.locals.session.redirectLink = '/loan/sailboat';
 
-						res.redirect('/loan/auto');
+						res.redirect('/loan/sailboat');
 					});
 				} else {
 					res.redirect('/sign/remote');
