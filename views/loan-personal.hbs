@@ -6,7 +6,7 @@
   <div id="error-why"></div>
 
   <div class="row">
-    <div class="col-sm-5 col-sm-offset-1">
+    <div class="col-sm-6">
 
       <h2 class="text-center">
         Personal Loan Application
@@ -142,7 +142,7 @@
             <label for="input">Signing Location</label>
             <select class="form-control" name="inputSigningLocation">
               {{#each signing_location_options}}
-                <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                <option value="{{splitString this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
                   {{this}}
                 </option>
               {{/each}}
@@ -238,7 +238,7 @@
           <li>Single Signer</li>
           <li>DOCX Import</li>
           <li>Auto-Place (Anchor) Tab Positioning</li>
-          <li>Embedded Signing (Recipient View)</li>
+          <li>Focused view</li>
           <li>Access Code Authentication</li>
         </ul>
 
@@ -254,7 +254,7 @@
         </h5>
 
         <p>
-          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to send the signature request with the corresponding form information. The envelope we construct contains a <code>document</code>, a recipient of type <code>signer</code>, and <code>tabs</code> which contain the form fields information. If embedded signing is selected we must also set the <code>clientUserId</code> property on the recipient.
+          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">Envelopes: create</a> API to send the signature request with the corresponding form information. The envelope we construct contains a <code>document</code>, a recipient of type <code>signer</code>, and <code>tabs</code> which contain the form fields information. If focused view is selected we must also set the <code>clientUserId</code> property on the recipient.
         </p>
 
         <p>
@@ -415,7 +415,7 @@ POST /v2.1/accounts/{accountId}/envelopes
         "email": "-- RECIPIENT EMAIL HERE --",
         "recipientId": "1",
         "accessCode": "12345",  // if access code selected
-        "clientUserId": "1001"  // if embedded signing selected
+        "clientUserId": "1001"  // if focused view selected
       }
     ]
   }
@@ -428,11 +428,11 @@ POST /v2.1/accounts/{accountId}/envelopes
         </h5>
 
         <p>
-          If Embedded Signing was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
+          If Focused view was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
         </p>
 
         <p>
-          Once the envelope is sent we save the envelope ID and Recipient information to our session then redirect to the <tt>/sign/embedded</tt> page. There we retrieve the envelope ID and recipient info from our session and create the recipient view by generating the URL and displaying in a full-width and full-height iframe.
+          To create the definition for focused view, you must add the signer's information, the <code>returnUrl</code>, the <code>frameAncestors</code> field, and the <code>messageOrigins</code> field.
         </p>
 
         <p>
@@ -455,9 +455,22 @@ POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
   "email": "-- RECIPIENT EMAIL HERE --",
   "recipientId": "1",
   "returnUrl": "-- RETURN URL HERE --",
-  "authenticationMethod": "email"
+  "authenticationMethod": "email",
+  "frameAncestors": ["-- DOMAIN NAME –-", “https://apps-d.docusign.com”],
+  "messageOrigins": ["https://apps-d.docusign.com"]
+
 }
 </pre>
+</div>
+<h5>
+          Step 3
+        </h5>
+
+        <p>
+          We next embed the envelope on the page. To do this, we place a <code>div</code> container on the html page, and then use the DocuSign JS library to mount the envelope to the page. We will need to provide the signing URL from the previous step and the div's id where the document will be rendered. We can also customize the <code>finishText</code>, <code>position</code>, and <code>signingNavigation</code> button for focused view signing.
+        </p>
+
+        <p>Learn how to set up your HTML page and create a focused view script using the DocuSign JS library on the <a href='https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/embedding/#focused-view' target='_blank'>DocuSign Developer Center.</a></p>
 
         </div>
 

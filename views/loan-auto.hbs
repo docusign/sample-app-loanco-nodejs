@@ -6,7 +6,7 @@
   <div id="error-why"></div>
 
   <div class="row">
-    <div class="col-sm-5 col-sm-offset-1">
+    <div class="col-sm-6">
 
       <h2 class="text-center">
         Auto Loan Application
@@ -51,7 +51,7 @@
               <label for="input">Signing Location</label>
               <select class="form-control" name="inputSigningLocation">
                 {{#each signing_location_options}}
-                  <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                  <option value="{{splitString this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
                     {{this}}
                   </option>
                 {{/each}}
@@ -131,7 +131,7 @@
                 <label for="input">Signing Location</label>
                 <select class="form-control" name="inputSigningLocationCosigner">
                   {{#each signing_location_options}}
-                    <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                    <option value="{{splitString this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
                       {{this}}
                     </option>
                   {{/each}}
@@ -249,6 +249,7 @@
           <li>Mutiple Signers</li>
           <li>Mutiple Documents</li>
           <li>Calculated (Formula) Tabs</li>
+          <li>Focused view</li>
         </ul>
 
         <br />
@@ -271,7 +272,7 @@
         </p>
 
         <p>
-          To identify and populate a given tab we use the <code>tabLabel</code> and <code>value</code> properties, respectively. And once again to use embedded signing we must set the <code>clientUserId</code> property for each recipient (or template role in this case).
+          To identify and populate a given tab we use the <code>tabLabel</code> and <code>value</code> properties, respectively. And once again to use focused view we must set the <code>clientUserId</code> property for each recipient (or template role in this case).
         </p>
 
         <p>
@@ -341,14 +342,12 @@ POST /v2.1/accounts/{accountId}/envelopes
         </h5>
 
         <p>
-          If Embedded Signing was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
+          If embedded was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
         </p>
 
         <p>
-          Once the envelope is sent we save the envelope ID and Recipient information to our session then redirect to the <tt>/sign/embedded</tt> page. There we retrieve the envelope ID and recipient info from our session and create the recipient view by generating the URL and displaying in a full-width and full-height iframe.
+          To create the definition for focused view, you must add the signer's information, the <code>returnUrl</code>, the <code>frameAncestors</code> field, and the <code>messageOrigins</code> field.
         </p>
-
-        <br />
 
         <p>
           To create the recipient view of the envelope we send an http POST request to:
@@ -359,7 +358,7 @@ POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
         </p>
         <p style="padding:20px 0;">
           <span class="collapseTrigger collapsed" data-toggle="collapse" data-target="#collapseJSON2" aria-expanded="false" aria-controls="collapseJSON2">
-            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON (the <code>ReturnUrl</code> information)
+            <i class="fa fa-plus-square-o show-on-collapsed" aria-hidden="true"></i><i class="fa fa-minus-square-o show-on-open" aria-hidden="true"></i> Click to view example request JSON
           </span>
         </p>
         <div class="collapse" id="collapseJSON2">
@@ -370,11 +369,22 @@ POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
   "email": "-- RECIPIENT EMAIL HERE --",
   "recipientId": "1",
   "returnUrl": "-- RETURN URL HERE --",
-  "authenticationMethod": "email"
+  "authenticationMethod": "email",
+  "frameAncestors": ["-- DOMAIN NAME –-", “https://apps-d.docusign.com”],
+  "messageOrigins": ["https://apps-d.docusign.com"]
+
 }
 </pre>
-        </div>
+</div>
+<h5>
+          Step 3
+        </h5>
 
+        <p>
+          We next embed the envelope on the page. To do this, we place a <code>div</code> container on the html page, and then use the DocuSign JS library to mount the envelope to the page. We will need to provide the signing URL from the previous step and the div's id where the document will be rendered. We can also customize the <code>finishText</code>, <code>position</code>, and <code>signingNavigation</code> button for focused view signing.
+        </p>
+
+        <p>Learn how to set up your HTML page and create a focused view script using the DocuSign JS library on the <a href='https://developers.docusign.com/docs/esign-rest-api/esign101/concepts/embedding/#focused-view' target='_blank'>DocuSign Developer Center.</a></p>
 
       </div>
 

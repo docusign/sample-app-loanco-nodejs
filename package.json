@@ -2,7 +2,7 @@
   "name": "docusign-sample-app-loanco-nodejs",
   "version": "0.0.0",
   "engines": {
-    "node": "~7.4.0"
+    "node": "~16.15.0"
   },
   "private": true,
   "scripts": {

@@ -39,10 +39,10 @@ router.post('/purchase/land', function(req, res, next) {
 	envDef.setDocuments(docs);
 
 
-	// Recipient 1 (purchaser, in-person signature) 
+	// Recipient 1 (purchaser, in-person signature)
 	var signer = new docusign.InPersonSigner();
-	signer.setHostName(body.inputSalesFirstName + ' ' + body.inputSalesLastName); // use for embedded signing!
-	signer.setHostEmail(body.inputSalesEmail); // use for embedded signing!
+	signer.setHostName(body.inputSalesFirstName + ' ' + body.inputSalesLastName); // use for focused view signing!
+	signer.setHostEmail(body.inputSalesEmail); // use for focused view signing!
 	signer.setSignerEmail(body.inputPurchaserEmail);
 	signer.setSignerName(body.inputPurchaserFirstName + ' ' + body.inputPurchaserLastName);
 	signer.setRecipientId('1');
@@ -58,7 +58,7 @@ router.post('/purchase/land', function(req, res, next) {
 	// 	signer.setAccessCode(body.inputAccessCode);
 	// }
 
-	// Recipient 2 (developer, remote, print and sign force-able) 
+	// Recipient 2 (developer, remote, print and sign force-able)
 	var signer2 = new docusign.Signer();
 	signer2.setEmail(body.inputDevEmail);
 	signer2.setName(body.inputDevFirstName + ' ' + body.inputDevLastName);
@@ -96,7 +96,7 @@ router.post('/purchase/land', function(req, res, next) {
 
 	// Note: using anchorStrings (in tabs below) makes documentId and pageNumber irrelevant (they affect all documents and pages)
 
-	// Recipient 1 (Purchaser) 
+	// Recipient 1 (Purchaser)
 
 	// FullName
 	tabList.fullName.push(app.helpers.makeTab('FullName', {
@@ -140,7 +140,7 @@ router.post('/purchase/land', function(req, res, next) {
 
 
 
-	// Recipient 2 (Developer) 
+	// Recipient 2 (Developer)
 
 	// FullName
 	tabList2.fullName.push(app.helpers.makeTab('FullName', {
@@ -210,7 +210,7 @@ router.post('/purchase/land', function(req, res, next) {
 
 	app.helpers.removeEmptyAndNulls(envDef);
 
-	// // pretty printing (no base64 bytes) 
+	// // pretty printing (no base64 bytes)
 	// var mockEnv = JSON.parse(JSON.stringify(envDef));
 	// mockEnv.documents = _.map(mockEnv.documents,function(doc){
 	// 	if(doc.documentBase64){
@@ -259,4 +259,3 @@ router.post('/purchase/land', function(req, res, next) {
 });
 
 module.exports = router;
-

@@ -3,7 +3,7 @@
 
 ### LoanCo Sample App
 
-> A sample loan application that demonstrates some common DocuSign API workflows including requesting signatures, embedded signing, forms and data, and real-time status.
+> A sample loan application that demonstrates some common DocuSign API workflows including requesting signatures, focused view, forms and data, and real-time status.
 
 <hr />
 
@@ -19,7 +19,7 @@ __Source on GitHub: <a target="_blank" href="https://github.com/DocuSign/sample-
 <ul>
 <li>Send document for signature</li>
 <li>Send from template</li>
-<li>Embedded signing </li>
+<li>Focused view</li>
 <li>Forms and form-field Data</li>
 <li>Real-time status</li>
 <li>Custom Branding</li>
