@@ -37,12 +37,7 @@ router.post('/loan/personal', function(req, res, next) {
 	// set the required authentication information
 	let dsApiClient = new docusign.ApiClient();
 	dsApiClient.setBasePath(req.session.basePath);
-  console.log("AUTH CREDS\n");
-  console.log(req.session.accountId);
-  console.log('\n');
-  console.log(req.session.access_token);
-  console.log('\n');
-  console.log(req.session.basePath);
+
   dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
 	// instantiate a new EnvelopesApi object
