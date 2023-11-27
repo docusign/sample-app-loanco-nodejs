@@ -12,23 +12,23 @@ var docusign = require('docusign-esign'),
   dsAuthCodeGrant = require('../DSAuthCodeGrant');
 
 router.get('/loan/sailboat', function(req, res, next) {
-  let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
-  var isRedirected = res.locals.session.isRedirected;
-  res.locals.session.isRedirected = false;
+  // let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
+  // var isRedirected = res.locals.session.isRedirected;
+  // res.locals.session.isRedirected = false;
 
-  if (!isRedirected && !tokenOK) {
-		req.session.loan = 'sailboat';
-		res.locals.session.loan = 'sailboat';
-		dsAuthCodeGrant.prototype.login(req, res, next)
-	}
-  else {
+  // if (!isRedirected && !tokenOK) {
+	// 	req.session.loan = 'sailboat';
+	// 	res.locals.session.loan = 'sailboat';
+	// 	dsAuthCodeGrant.prototype.login(req, res, next)
+	// }
+  // else {
     res.render('loan-sailboat', {
       signing_location_options: app.helpers.signing_location_options,
       authentication_options: app.helpers.authentication_options,
 	  signing_url: res.locals.session.signingUrl,
 	  client_id: res.locals.session.clientId,
     });
-  }
+  // }
 });
 
 router.post('/loan/sailboat', function(req, res, next) {
@@ -309,7 +309,7 @@ router.post('/loan/sailboat', function(req, res, next) {
 		// set the required authentication information
 		let dsApiClient = new docusign.ApiClient();
     dsApiClient.setBasePath(req.session.basePath);
-    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
 		// instantiate a new EnvelopesApi object
 		var envelopesApi = new docusign.EnvelopesApi(dsApiClient);

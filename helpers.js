@@ -67,7 +67,7 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
     // set the required authentication information
     let dsApiClient = new docusign.ApiClient();
     dsApiClient.setBasePath(req.session.basePath);
-    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
     // instantiate a new EnvelopesApi object
     var envelopesApi = new docusign.EnvelopesApi(dsApiClient);
@@ -128,7 +128,7 @@ helpers.createAndSaveLocal = function createAndSaveLocal(req, envelopeId){
 	// set the required authentication information
 	let dsApiClient = new docusign.ApiClient();
 	dsApiClient.setBasePath(req.session.basePath);
-  dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+  dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
 	// instantiate a new EnvelopesApi object
 	var envelopesApi = new docusign.EnvelopesApi(dsApiClient);
