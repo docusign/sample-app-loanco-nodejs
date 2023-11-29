@@ -6,7 +6,7 @@
   <div id="error-why"></div>
 
   <div class="row">
-    <div class="col-sm-5 col-sm-offset-1">
+    <div class="col-sm-6">
 
       <h2 class="text-center">
         Sailboat Loan
@@ -14,7 +14,7 @@
 
       <hr />
 
-
+<div class="docusign-agreement" id="agreement">
       <form id="mainForm1" data-toggle="validator" method="POST" action="/loan/sailboat">
 
         <div class="form-group">
@@ -45,7 +45,7 @@
             <label for="input">Signing Location</label>
             <select class="form-control" name="inputSigningLocation">
               {{#each signing_location_options}}
-                <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                <option value="{{splitString this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
                   {{this}}
                 </option>
               {{/each}}
@@ -116,7 +116,7 @@
             <label for="input">Signing Location</label>
             <select class="form-control" name="inputSigningLocationAppraiser">
               {{#each signing_location_options}}
-                <option value="{{this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
+                <option value="{{splitString this}}" {{#ifCond this "==" ../config.signing_location}}selected{{/ifCond}}>
                   {{this}}
                 </option>
               {{/each}}
@@ -172,6 +172,7 @@
 
 
       </form>
+      </div>
 
     </div>
 
@@ -217,7 +218,7 @@
         </h5>
 
         <p>
-          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">Envelopes: create</a> API to send the signature request with the corresponding form information. We add <code>Documents</code> to sign and use a <code>signerAttachmentTab</code> to allow an optional image file to be added to the envelope. You can optionally add additional factors of authentication, such as <code>AccessCode</code>, Phone, or ID Check, and you can sign using embedded signing or remote signing.
+          When the form is submitted we use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeViews/createRecipient" target="_blank">Envelopes: create</a> API to send the signature request with the corresponding form information. We add <code>Documents</code> to sign and use a <code>signerAttachmentTab</code> to allow an optional image file to be added to the envelope. You can optionally add additional factors of authentication, such as <code>AccessCode</code>, Phone, or ID Check, and you can sign using focused view or remote signing.
         </p>
 
         <p>
@@ -437,7 +438,7 @@ POST /v2.1/accounts/{accountId}/envelopes
         </h5>
 
         <p>
-          If Embedded Signing was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
+          If focused view was selected we next use the <a href="https://developers.docusign.com/esign-rest-api/reference/Envelopes/Envelopes/create" target="_blank">EnvelopeViews: createRecipient</a> API to generate a signing URL for the recipient. For this to work the <code>clientUserId</code> property must be set on the recipient when the envelope was sent during step 1.
         </p>
 
         <p>
@@ -470,10 +471,22 @@ POST /v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient
   "authenticationMethod": "email",
   "assertionId": null,
   "authenticationInstant": null,
-  "securityDomain": null
+  "securityDomain": null,
+  "frameAncestors": ["-- DOMAIN NAME –-", “https://apps-d.docusign.com”],
+  "messageOrigins": ["https://apps-d.docusign.com"]
 }
 </pre>
         </div>
+
+        <h5>
+          Step 3
+        </h5>
+
+        <p>
+          We next embed the envelope on the page. To do this, we place a <code>div</code> container on the html page, and then use the DocuSign JS library to mount the envelope to the page. We will need to provide the signing URL from the previous step and the div's id where the document will be rendered. We can also customize the <code>finishText</code>, <code>position</code>, and <code>signingNavigation</code> button for focused view signing.
+        </p>
+
+        <p>Learn how to set up your HTML page and create a focused view script using the DocuSign JS library on the <a href='https://developers.docusign.com/docs/esign-rest-api/how-to/request-signature-focused-view/' target='_blank'>DocuSign Developer Center.</a></p>
 
       </div>
 

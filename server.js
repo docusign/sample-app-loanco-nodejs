@@ -11,6 +11,7 @@ var _ = require('lodash');
 var moment = require('moment');
 var passport = require('passport');
 var helmet = require('helmet');
+var docusign = require('docusign-esign');
 
 // In case of uncaught exception, print the full-stack
 process.on('uncaughtException', function(err) {
@@ -32,6 +33,9 @@ app.engine('hbs', exphbs.engine({
   helpers: {
     toJSON : function(object) {
       return JSON.stringify(object);
+    },
+    splitString : function(string){
+      return string.replace(/ .*/,'');
     },
     ifCond : function(obj1, sign, obj2, options) {
       switch(sign){
@@ -129,7 +133,7 @@ app.get('*',function(req,res,next){
   next();
 });
 
-app.use('/', function(req, res, next){
+app.use('/', async function(req, res, next){
   console.log('req.session start:', JSON.stringify(req.session));
   // setup session id if not already set
   if(!req.session.id){
@@ -143,10 +147,44 @@ app.use('/', function(req, res, next){
     'authentication',
     'access_code'
   ];
+  req.session.accountId = app.config.auth.AccountId;
+  req.session.basePath = "https://demo.docusign.net/restapi";
   _.each(defaultsToUse, function(key){
     req.session.config[key] = (key in req.session.config) ? req.session.config[key] : app.config[key];
   });
 
+  console.log('req.session end:', JSON.stringify(req.session));
+  console.log ('starting JWT Auth token request');
+	// set the required authentication information
+	let dsApiClient = new docusign.ApiClient();
+  dsApiClient.setOAuthBasePath('account-d.docusign.com');
+  try {
+    var results = await dsApiClient.requestJWTUserToken(app.config.auth.IntegrationKey, app.config.auth.UserId, "signature", app.config.auth.RSAKey, 600);
+    var token = results.body.access_token;
+    console.log ('Finished JWT Auth token request');
+    req.session.access_token = token;
+  } catch (e) {
+    let body = e.response.body;
+    if(body){
+        // DocuSign API problem
+        if (body.error == 'consent_required') {
+          var authBasePath = "https://account-d.docusign.com/";
+          // Consent problem
+          let consent_scopes = 'signature%20impersonation',
+              consent_url = `${authBasePath}/oauth/auth?response_type=code&` +
+                  `scope=${consent_scopes}&client_id=${app.config.auth.IntegrationKey}&` +
+                  `redirect_uri=${app.config.auth.LocalReturnUrl}`;
+          res.redirect(consent_url);
+      } else {
+          // Some other DocuSign API problem
+          console.log(`\nAPI problem: Status code ${e.response.status}, message body:
+          ${JSON.stringify(body, null, 4)}\n\n`);
+      }
+    } else {
+      // Not an API problem
+      throw e;
+    }
+  }
   console.log('req.session end:', JSON.stringify(req.session));
   next();
 });

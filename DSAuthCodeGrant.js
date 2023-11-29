@@ -1,11 +1,11 @@
-/** 
+/**
  * @file
  * This file implements the <tt>DSAuthCodeGrant</tt> class.
  * It handles the OAuth Authorization Code Grant flow.
  * It also looks up the user's default account and baseUrl
- * 
+ *
  * For the purposes of this example, it ignores the refresh
- * token that is returned from DocuSign. In production, 
+ * token that is returned from DocuSign. In production,
  * depending on your use case, you can store and then use the
  * refresh token instead of requiring the user to re-authenticate.
  * @author DocuSign
@@ -30,7 +30,7 @@ let DSAuthCodeGrant = function _DSAuthCodeGrant(req) {
   this._debug_prefix = 'DSAuthCodeGrant';
   this._accessToken = req.user && req.user.accessToken;   // The bearer token. Get it via #checkToken
   this._refreshToken = req.user && req.user.refreshToken;   // Note, the refresh token is not used in this example.
-  // For production use, you'd want to store the refresh token in non-volatile storage since it is 
+  // For production use, you'd want to store the refresh token in non-volatile storage since it is
   // good for 30 days. You'd probably want to encrypt it too.
   this._tokenExpiration = req.user && req.user.tokenExpirationTimestamp;  // when does the token expire?
   this._debug = true;  // ### DEBUG ### setting
@@ -62,7 +62,7 @@ DSAuthCodeGrant.prototype.login = function (req, res, next) {
 }
 
 DSAuthCodeGrant.prototype.oauth_callback1 = (req, res, next) => {
-    // This callback URL is used for the login flow 
+    // This callback URL is used for the login flow
     passport.authenticate('docusign', { failureRedirect: '/ds/login' })(req, res, next)
 }
 DSAuthCodeGrant.prototype.oauth_callback2 = function _oauth_callback2(req, res, next) {
@@ -84,17 +84,17 @@ DSAuthCodeGrant.prototype.oauth_callback2 = function _oauth_callback2(req, res, 
     // The baseUri changes rarely so it can (and should) be cached.
     //
     // req.user holds the result of the DocuSign OAuth call and the OAuth::userInfo method,
-    // except for the expires element. 
+    // except for the expires element.
     // req.user.accessToken: "eyJ0Xbz....vXXFw7IlVwfDRA"
     // req.user.accounts:  An array of accounts that the user has access to
     //     An example account:
-    //      {account_id: "8118f2...8a", 
-    //      is_default: false, 
-    //      account_name: "Xylophone World", 
+    //      {account_id: "8118f2...8a",
+    //      is_default: false,
+    //      account_name: "Xylophone World",
     //      base_uri: "https://demo.docusign.net"}  (Note: does not include '/restapi/v2')
     // created: "2015-05-20T11:48:23.363"  // when was the user's record created
     // email: "name@example.com" // the user's email
-    // The expires element is added in function _processDsResult in file index.js. 
+    // The expires element is added in function _processDsResult in file index.js.
     // It is the datetime when the token will expire:
     // expires: Moment {_isAMomentObject: true, _isUTC: false, _pf: {…}, _locale: Locale, _d: Tue Jun 26 2018 04:05:37 GMT+0300 (IDT), …}
     // expiresIn: 28800  // when the token will expire, in seconds, from when the OAuth response is sent by DocuSign
@@ -102,7 +102,7 @@ DSAuthCodeGrant.prototype.oauth_callback2 = function _oauth_callback2(req, res, 
     // given_name: "Larry" // the user's first name
     // name: "Larry LastName"
     // provider: "docusign"
-    // refreshToken: "eyJ0eXAiOiJ...HB4Q" // Can be used to obtain a new set of access and response tokens. 
+    // refreshToken: "eyJ0eXAiOiJ...HB4Q" // Can be used to obtain a new set of access and response tokens.
     // The lifetime for the refreshToken is typically 30 days
     // sub: "...5fed18870" // the user's id in guid format
 
@@ -111,12 +111,12 @@ DSAuthCodeGrant.prototype.oauth_callback2 = function _oauth_callback2(req, res, 
     const loan = `loan-${req.session.loan || res.locals.session.loan}`;
 		res.render(loan, {
 			signing_location_options: app.helpers.signing_location_options,
-			authentication_options: app.helpers.authentication_options
+			authentication_options: app.helpers.authentication_options,
 		});
   }
 
 /**
- * Clears the DocuSign authentication session token 
+ * Clears the DocuSign authentication session token
  * https://account-d.docusign.com/oauth/logout
  * @function
  */
@@ -153,6 +153,7 @@ DSAuthCodeGrant.prototype.internalLogout = function _internalLogout(req, res) {
   req.session.accountId = null;
   req.session.accountName = null;
   req.session.basePath = null;
+  req.session.access_token = null;
 }
 
 /**
@@ -166,7 +167,7 @@ DSAuthCodeGrant.prototype.getDefaultAccountInfo = function _getDefaultAccountInf
     const targetAccountId = null
         , accounts = req.user.accounts
         ;
-    
+
     let account = null; // the account we want to use
     // Find the account...
     if (targetAccountId) {
@@ -216,7 +217,7 @@ DSAuthCodeGrant.prototype.getAccessToken = function _getAccessToken() {
 }
 
 /**
- * Store the example number in session storage so it will be 
+ * Store the example number in session storage so it will be
  * used after the user is authenticated
  * @function
  * @param object req The request object
@@ -252,4 +253,3 @@ DSAuthCodeGrant.prototype._debug_log_obj = function (m, obj){
 
 
 module.exports = DSAuthCodeGrant;  // SET EXPORTS for the module.
-

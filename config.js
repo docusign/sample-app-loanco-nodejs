@@ -21,6 +21,9 @@ var docusignBaseUrl = 'https://' + docusignEnv + '.docusign.net/restapi';
 config.auth = {
 	IntegrationKey: process.env.DOCUSIGN_IK,
 	ClientSecret: process.env.DOCUSIGN_CLIENT_SECRET,
+  RSAKey: fs.readFileSync("./rsa.txt"),
+  AccountId: process.env.DOCUSIGN_ACCOUNT_ID,
+  UserId: process.env.DOCUSIGN_USER_ID,
 	EmployeeEmail: process.env.EMPLOYEE_EMAIL,
 	EmployeeName: process.env.EMPLOYEE_NAME,
 	LocalReturnUrl: process.env.LOCAL_RETURN_URL
@@ -38,7 +41,7 @@ config.templates = [
 		key: 'cosigner_on_auto_loan',
 		name: 'Auto Loan with Cosigner',
 		json: require('./pdfs/template-auto-loan.json') // import the name of the template, see if one exists already
-	}	
+	}
 ];
 config.templatesByKey = {};
 _.each(config.templates, function(template){

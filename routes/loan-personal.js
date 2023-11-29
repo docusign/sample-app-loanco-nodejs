@@ -10,20 +10,28 @@ var docusign = require('docusign-esign'),
   dsAuthCodeGrant = require('../DSAuthCodeGrant');
 
 router.get('/loan/personal', function(req, res, next) {
-    let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
-    if (! tokenOK) {
+  //   let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
+	var isRedirected = res.locals.session.isRedirected;
+	res.locals.session.isRedirected = false;
+
+    if (!isRedirected) {
 		req.session.loan = 'personal';
 		res.locals.session.loan = 'personal';
-		dsAuthCodeGrant.prototype.login(req, res, next)
-	}
-	else {
+    const loan = `loan-${req.session.loan || res.locals.session.loan}`;
+		res.render(loan, {
+			signing_location_options: app.helpers.signing_location_options,
+			authentication_options: app.helpers.authentication_options,
+		});
+	// 	dsAuthCodeGrant.prototype.login(req, res, next)
+	} else {
 		res.render('loan-personal', {
 			signing_location_options: app.helpers.signing_location_options,
-			authentication_options: app.helpers.authentication_options
+			authentication_options: app.helpers.authentication_options,
+			signing_url: res.locals.session.signingUrl,
+			client_id: res.locals.session.clientId,
 		});
 	}
 });
-
 
 router.post('/loan/personal', function(req, res, next) {
 
@@ -34,7 +42,8 @@ router.post('/loan/personal', function(req, res, next) {
 	// set the required authentication information
 	let dsApiClient = new docusign.ApiClient();
 	dsApiClient.setBasePath(req.session.basePath);
-    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+
+  dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
 	// instantiate a new EnvelopesApi object
 	var envelopesApi = new docusign.EnvelopesApi(dsApiClient);
@@ -247,12 +256,11 @@ router.post('/loan/personal', function(req, res, next) {
 						return console.error(err);
 					}
 
-					req.session.envelopeId = envelopeSummary.envelopeId;
-					req.session.signingUrl = data.url;
+					res.locals.session.signingUrl = data.url;
+					res.locals.session.isRedirected = true;
+					res.locals.session.clientId = process.env.DOCUSIGN_IK;
 
-					res.redirect('/sign/embedded');
-
-
+					res.redirect('/loan/personal');
 				});
 			} else {
 				res.redirect('/sign/remote');

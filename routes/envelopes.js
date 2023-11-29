@@ -11,7 +11,7 @@ var docusign = require('docusign-esign'),
 router.get('/envelopes/:envelopeId/filelist/', function(req, res, next){
 	app.models.Envelope.findOne({
 		envelopeId: req.params.envelopeId,
-		userId: req.user?.sub
+		sessionId: req.session.id
 	})
 	.sort({_id: -1})
 	.exec(function(err, envelope){
@@ -25,7 +25,7 @@ router.get('/envelopes/:envelopeId/filelist/', function(req, res, next){
 router.get('/envelopes/:envelopeId/download/:documentId', function(req, res, next){
 	app.models.Envelope.findOne({
 		envelopeId: req.params.envelopeId,
-		userId: req.user?.sub
+		sessionId: req.session.id
 	})
 	.exec(function(err, envelope){
 		if(err){
@@ -38,7 +38,7 @@ router.get('/envelopes/:envelopeId/download/:documentId', function(req, res, nex
 		// set the required authentication information
 		let dsApiClient = new docusign.ApiClient();
 		dsApiClient.setBasePath(req.session.basePath);
-		dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+		dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
 		// instantiate a new EnvelopesApi object
 		var envelopesApi = new docusign.EnvelopesApi(dsApiClient);
@@ -68,7 +68,7 @@ router.get('/envelopes/:envelopeId/download/:documentId', function(req, res, nex
 
 router.get('/envelopes', function(req, res, next){
 	app.models.Envelope.find({
-		userId: req.user?.sub
+		sessionId: req.session.id
 	})
 	.exec(function(err, envelopes){
 		console.log(JSON.stringify(envelopes,null,2));

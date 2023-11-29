@@ -10,7 +10,7 @@ var dsAuthCodeGrant = require('./DSAuthCodeGrant');
 var helpers = {};
 
 
-helpers.signing_location_options = ['embedded', 'remote'];
+helpers.signing_location_options = ['embedded (focused view)', 'remote'];
 helpers.authentication_options = ['none','phone','idcheck'];
 
 helpers.makeTab = function makeTab(type, data) {
@@ -50,22 +50,24 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
 
   // set the url where you want the recipient to go once they are done signing
     // - this can be used by your app to watch the URL and detect when signing has completed (or was canceled)
-    var returnUrl = new docusign.RecipientViewRequest();
-    returnUrl.returnUrl = `${app.config.auth.LocalReturnUrl}/pop/` + envelopeId;
-    returnUrl.authenticationMethod = 'email';
+    var recipientViewRequest = new docusign.RecipientViewRequest();
+    recipientViewRequest.returnUrl = `${app.config.auth.LocalReturnUrl}`;
+    recipientViewRequest.authenticationMethod = 'email';
 
     // recipient information must match embedded recipient info we provided
-    returnUrl.userName = recipient.name || recipient.hostName;
-    returnUrl.email = recipient.email || recipient.hostEmail;
-    returnUrl.recipientId = recipient.recipientId;
-    returnUrl.clientUserId = recipient.clientUserId;
-
-    app.helpers.removeEmptyAndNulls(returnUrl);
+    recipientViewRequest.userName = recipient.name || recipient.hostName;
+    recipientViewRequest.email = recipient.email || recipient.hostEmail;
+    recipientViewRequest.clientUserId = recipient.clientUserId;
+    recipientViewRequest.pingFrequency = "60";
+    recipientViewRequest.pingUrl = app.config.auth.LocalReturnUrl;
+    recipientViewRequest.frameAncestors = [app.config.auth.LocalReturnUrl, 'https://apps-d.docusign.com'];
+    recipientViewRequest.messageOrigins = ['https://apps-d.docusign.com'];
+    app.helpers.removeEmptyAndNulls(recipientViewRequest);
 
     // set the required authentication information
     let dsApiClient = new docusign.ApiClient();
     dsApiClient.setBasePath(req.session.basePath);
-    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+    dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
     // instantiate a new EnvelopesApi object
     var envelopesApi = new docusign.EnvelopesApi(dsApiClient);
@@ -73,7 +75,7 @@ helpers.getRecipientUrl = function getRecipientUrl(req, envelopeId, recipient, c
     // console.log(JSON.stringify(returnUrl,null,2));
 
     // call the CreateRecipientView API
-    envelopesApi.createRecipientView(req.session.accountId, envelopeId, {recipientViewRequest: returnUrl}, function (error, recipientView, response) {
+    envelopesApi.createRecipientView(req.session.accountId, envelopeId, {recipientViewRequest: recipientViewRequest}, function (error, recipientView, response) {
       if (error) {
         console.log('createRecipientView Error');
         // console.error(error.error);
@@ -126,7 +128,7 @@ helpers.createAndSaveLocal = function createAndSaveLocal(req, envelopeId){
 	// set the required authentication information
 	let dsApiClient = new docusign.ApiClient();
 	dsApiClient.setBasePath(req.session.basePath);
-  dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + dsAuthCodeGrant.prototype.getAccessToken());
+  dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + req.session.access_token);
 
 	// instantiate a new EnvelopesApi object
 	var envelopesApi = new docusign.EnvelopesApi(dsApiClient);
@@ -154,7 +156,7 @@ helpers.createAndSaveLocal = function createAndSaveLocal(req, envelopeId){
         }
 
         var localEnv = {
-          userId: req.user?.sub,
+          sessionId: req.session.id,
           envelopeId: envelopeSummary.envelopeId,
           data: envelopeSummary, // this will be updated throughout the lifecycle
           documents: documents.envelopeDocuments,

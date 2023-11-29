@@ -30,10 +30,10 @@ router.get('/sign/embedded', function(req, res){
 	if(!signingUrl){
 		return res.redirect('/');
 	}
-	req.session.signingUrl = null;
-	res.render('embeddedsign', {
-		signingUrl: signingUrl
-	});
+	res.locals.session.signingUrl = signingUrl;
+	res.locals.session.isRedirected = true;
+	res.locals.session.clientId = process.env.DOCUSIGN_IK;
+	res.redirect(res.locals.session.redirectLink);
 });
 
 router.get('/sign/return', function(req, res){
