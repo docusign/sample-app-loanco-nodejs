@@ -156,7 +156,7 @@ helpers.createAndSaveLocal = function createAndSaveLocal(req, envelopeId){
         }
 
         var localEnv = {
-          userId: req.user?.sub,
+          sessionId: req.session.id,
           envelopeId: envelopeSummary.envelopeId,
           data: envelopeSummary, // this will be updated throughout the lifecycle
           documents: documents.envelopeDocuments,

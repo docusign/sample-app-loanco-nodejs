@@ -65,9 +65,9 @@ pages.forEach(function(page){
 
 router.get('/restart-session', function(req, res, next) {
   app.models.Envelope.remove({
-    userId: req.user?.sub
+    sessionId: req.session.id
   })
-  
+
   req.session.destroy();
   res.redirect('/');
 });

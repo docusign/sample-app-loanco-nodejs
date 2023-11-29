@@ -11,21 +11,26 @@ var docusign = require('docusign-esign'),
 
 router.get('/loan/auto', function(req, res, next) {
   //   let tokenOK = dsAuthCodeGrant.prototype.checkToken(3);
-	// var isRedirected = res.locals.session.isRedirected;
-	// res.locals.session.isRedirected = false;
+	var isRedirected = res.locals.session.isRedirected;
+	res.locals.session.isRedirected = false;
 
-  //   if (!isRedirected && !tokenOK) {
-	// 	req.session.loan = 'auto';
-	// 	res.locals.session.loan = 'auto';
+  if (!isRedirected) {
+		req.session.loan = 'auto';
+		res.locals.session.loan = 'auto';
+    const loan = `loan-${req.session.loan || res.locals.session.loan}`;
+		res.render(loan, {
+			signing_location_options: app.helpers.signing_location_options,
+			authentication_options: app.helpers.authentication_options,
+		});
 	// 	dsAuthCodeGrant.prototype.login(req, res, next)
-	// } else {
+	} else {
 		res.render('loan-auto', {
 			signing_location_options: app.helpers.signing_location_options,
 			authentication_options: app.helpers.authentication_options,
 			signing_url: res.locals.session.signingUrl,
 			client_id: res.locals.session.clientId,
 		});
-	// }
+	}
 });
 
 router.post('/loan/auto', function(req, res, next) {
