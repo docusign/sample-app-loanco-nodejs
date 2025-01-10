@@ -1,7 +1,7 @@
 # ⚠️ Archived Repository Notice ⚠️
 This repository has been **archived** and is no longer actively maintained.
 ## For alternatives or further development
-[MyWebForms](https://mywebforms.sampleapps.docusign.com/) is an updated and actively maintained version of this application and is also available on [GitHub](https://github.com/docusign/sample-app-mywebforms-csharp/). The new version includes additional DocuSign features, such as support for web forms, and continues to receive updates and improvements. 
+[MyWebForms](https://mywebforms.sampleapps.docusign.com/) is an updated and actively maintained version of this application and is also available on [GitHub](https://github.com/docusign/sample-app-mywebforms-csharp/). The new version includes additional Docusign features, such as support for web forms, and continues to receive updates and improvements. 
 ## Explore More 
 Be sure to check out the [Docusign Developer Center](https://developers.docusign.com/sample-apps/) for a full list of supported sample apps.  
 Thank you for your interest and support!
