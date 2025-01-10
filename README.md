@@ -1,5 +1,13 @@
+# ⚠️ Archived Repository Notice ⚠️
+This repository has been **archived** and is no longer actively maintained.
+## For alternatives or further development
+[MyWebForms](https://mywebforms.sampleapps.docusign.com/) is an updated and actively maintained version of this application and is also available on [GitHub](https://github.com/docusign/sample-app-mywebforms-csharp/). The new version includes additional DocuSign features, such as support for web forms, and continues to receive updates and improvements. 
+## Explore More 
+Be sure to check out the [Docusign Developer Center](https://developers.docusign.com/sample-apps/) for a full list of supported sample apps.  
+Thank you for your interest and support!
 
-### DocuSign LoanCo Sample App
+
+# DocuSign LoanCo Sample App
 
 LoanCo is a sample loan app that shows some common ways an application might interact with the DocuSign eSignature API. Various switches (authentication, focused view, templates) can be changed to show additional platform and API features and how easy they are to add to your own solution. LoanCo offers three (3) different loan workflows that demonstrate various features and workflows available through the platform.
 
